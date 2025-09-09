@@ -1,6 +1,5 @@
 import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomInput/symptom_input_notifier.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomInput/symptom_input_state.dart';
 import 'package:dbheatlcareproject/features/presentation/widgets/image_with_text_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +42,6 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        print("initState: Resetting symptom input session after frame.");
         ref
             .read(symptomInputNotifierProvider.notifier)
             .resetSymptomInputSession(0);
@@ -105,11 +103,8 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
         (state) => state.allQuestionsCompleted,
       ),
       (previous, next) {
-        print('asdkjfhsdkjf: completed, listen');
         // allQuestionsCompleted가 true로 변경되었고, 이전 값은 false였을 때
         if (next == true && (previous == false || previous == null)) {
-          print("All questions completed! Navigating to the next screen.");
-          print('asdkjfhsdkjf: completed, listen asdf');
           context.replace(SymptomResultScreen.routePath);
         }
       },
@@ -132,12 +127,8 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.0
-              ),
-              child: SvgPicture.asset(
-                AppSvgs.appLogoCircleIcon,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: SvgPicture.asset(AppSvgs.appLogoCircleIcon),
             ),
             Expanded(
               child: ListView.builder(
@@ -177,16 +168,17 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
                     int length = symptomState.currentArray.length;
                     for (int i = 0; i < length; i += 2) {
                       List<Widget> rowItems = [];
+                      // TODO Replace Text to clickable
                       rowItems.add(Text(symptomState.currentArray[i]));
                       if (i + 1 < length) {
                         rowItems.add(Text(symptomState.currentArray[i + 1]));
                       }
                       widgets.add(Row(children: rowItems));
-                      return ChatMessageBubble(
-                        message: message,
-                        widgets: widgets,
-                      );
                     }
+                    return ChatMessageBubble(
+                      message: message,
+                      widgets: widgets,
+                    );
                   }
                 },
               ),
