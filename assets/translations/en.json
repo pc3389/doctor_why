@@ -1,0 +1,8 @@
+{
+  "app_title": "My Healthcare App",
+  "hello_message": "Hello!",
+  "another_text_example": "This is another example text.",
+  "manual_style_selection": "Manual Style Selection Example",
+  "symptom_input_label": "Please describe your symptoms:",
+  "submit_button": "Submit"
+}

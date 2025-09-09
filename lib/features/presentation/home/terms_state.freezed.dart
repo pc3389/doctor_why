@@ -1,0 +1,167 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'terms_state.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+/// @nodoc
+mixin _$TermsState {
+  bool get hasAgreedToTerms =>
+      throw _privateConstructorUsedError; // 사용자가 약관에 동의했는지 여부
+  bool get isLoading => throw _privateConstructorUsedError;
+
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TermsStateCopyWith<TermsState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TermsStateCopyWith<$Res> {
+  factory $TermsStateCopyWith(
+          TermsState value, $Res Function(TermsState) then) =
+      _$TermsStateCopyWithImpl<$Res, TermsState>;
+  @useResult
+  $Res call({bool hasAgreedToTerms, bool isLoading});
+}
+
+/// @nodoc
+class _$TermsStateCopyWithImpl<$Res, $Val extends TermsState>
+    implements $TermsStateCopyWith<$Res> {
+  _$TermsStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasAgreedToTerms = null,
+    Object? isLoading = null,
+  }) {
+    return _then(_value.copyWith(
+      hasAgreedToTerms: null == hasAgreedToTerms
+          ? _value.hasAgreedToTerms
+          : hasAgreedToTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TermsStateImplCopyWith<$Res>
+    implements $TermsStateCopyWith<$Res> {
+  factory _$$TermsStateImplCopyWith(
+          _$TermsStateImpl value, $Res Function(_$TermsStateImpl) then) =
+      __$$TermsStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool hasAgreedToTerms, bool isLoading});
+}
+
+/// @nodoc
+class __$$TermsStateImplCopyWithImpl<$Res>
+    extends _$TermsStateCopyWithImpl<$Res, _$TermsStateImpl>
+    implements _$$TermsStateImplCopyWith<$Res> {
+  __$$TermsStateImplCopyWithImpl(
+      _$TermsStateImpl _value, $Res Function(_$TermsStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasAgreedToTerms = null,
+    Object? isLoading = null,
+  }) {
+    return _then(_$TermsStateImpl(
+      hasAgreedToTerms: null == hasAgreedToTerms
+          ? _value.hasAgreedToTerms
+          : hasAgreedToTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TermsStateImpl implements _TermsState {
+  const _$TermsStateImpl(
+      {this.hasAgreedToTerms = false, this.isLoading = false});
+
+  @override
+  @JsonKey()
+  final bool hasAgreedToTerms;
+// 사용자가 약관에 동의했는지 여부
+  @override
+  @JsonKey()
+  final bool isLoading;
+
+  @override
+  String toString() {
+    return 'TermsState(hasAgreedToTerms: $hasAgreedToTerms, isLoading: $isLoading)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TermsStateImpl &&
+            (identical(other.hasAgreedToTerms, hasAgreedToTerms) ||
+                other.hasAgreedToTerms == hasAgreedToTerms) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, hasAgreedToTerms, isLoading);
+
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TermsStateImplCopyWith<_$TermsStateImpl> get copyWith =>
+      __$$TermsStateImplCopyWithImpl<_$TermsStateImpl>(this, _$identity);
+}
+
+abstract class _TermsState implements TermsState {
+  const factory _TermsState(
+      {final bool hasAgreedToTerms, final bool isLoading}) = _$TermsStateImpl;
+
+  @override
+  bool get hasAgreedToTerms; // 사용자가 약관에 동의했는지 여부
+  @override
+  bool get isLoading;
+
+  /// Create a copy of TermsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TermsStateImplCopyWith<_$TermsStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

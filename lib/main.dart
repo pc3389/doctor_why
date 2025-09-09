@@ -1,0 +1,48 @@
+import 'package:dbheatlcareproject/features/navigation/app_router.dart';
+import 'package:dbheatlcareproject/features/presentation/appbar/custom_app_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'core/theme/app_colors.dart';
+
+Future<void> main() async {
+  // Flutter 엔진 바인딩 초기화 보장
+  WidgetsFlutterBinding.ensureInitialized();
+  // EasyLocalization 초기화 보장
+  await EasyLocalization.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+  );
+  runApp(
+    ProviderScope(
+      child: EasyLocalization(
+        supportedLocales: [Locale('en'), Locale('ko')],
+        path: 'assets/translations',
+        fallbackLocale: Locale('en'),
+        useOnlyLangCode: true,
+        // 만약 'en_US' 대신 'en' 파일만 사용하고 싶을 경우
+        child: MyApp(),
+      ),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
+      routerConfig: AppRouter.router,
+    );
+  }
+}
