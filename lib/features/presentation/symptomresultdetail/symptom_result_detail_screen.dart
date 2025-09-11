@@ -36,26 +36,27 @@ class _SymptomResultDetailScreenState
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notifier = ref.read(symptomResultDetailNotifierProvider.notifier);
-
-      notifier.addDiseasePrediction(
-        DiseasePrediction(name: '1번', probability: 80),
-      );
-      notifier.addDiseasePrediction(
-        DiseasePrediction(name: '2번', probability: 17),
-      );
-      notifier.addDiseasePrediction(
-        DiseasePrediction(name: '3번', probability: 3),
-      );
-
-      notifier.addWhatToDo('수분을 자주 섭취하세요. 수분을 자주 섭취하세요.');
-      notifier.addWhatToDo('가습기를 사용하여 실내 습도를 유지하세요. 가습기를 사용하여 실내 습도를 유지하세요.');
-      notifier.addWhatToDo('무리한 음성 사용이나 흡연은 피하세요. 무리한 음성 사용이나 흡연은 피하세요.');
-      notifier.addMedicine(Medicine(name: 'name', description: 'description'));
-      notifier.addMedicine(Medicine(name: 'name', description: 'description'));
-      notifier.addMedicine(Medicine(name: 'name', description: 'description'));
-      notifier.addFood('음식 1');
-      notifier.addFood('음식 2');
-      notifier.addFood('음식 3');
+      notifier.updateStateWithGptResponse();
+      //
+      // notifier.addDiseasePrediction(
+      //   DiseasePrediction(name: '1번', probability: 80),
+      // );
+      // notifier.addDiseasePrediction(
+      //   DiseasePrediction(name: '2번', probability: 17),
+      // );
+      // notifier.addDiseasePrediction(
+      //   DiseasePrediction(name: '3번', probability: 3),
+      // );
+      //
+      // notifier.addWhatToDo('수분을 자주 섭취하세요. 수분을 자주 섭취하세요.');
+      // notifier.addWhatToDo('가습기를 사용하여 실내 습도를 유지하세요. 가습기를 사용하여 실내 습도를 유지하세요.');
+      // notifier.addWhatToDo('무리한 음성 사용이나 흡연은 피하세요. 무리한 음성 사용이나 흡연은 피하세요.');
+      // notifier.addMedicine(Medicine(name: 'name', description: 'description'));
+      // notifier.addMedicine(Medicine(name: 'name', description: 'description'));
+      // notifier.addMedicine(Medicine(name: 'name', description: 'description'));
+      // notifier.addFood('음식 1');
+      // notifier.addFood('음식 2');
+      // notifier.addFood('음식 3');
     });
   }
 
@@ -133,9 +134,7 @@ class _SymptomResultDetailScreenState
                             ),
                             SizedBox(height: 12.0),
                             Text(
-                              '기침이 경미하고 발열 및 호흡 곤란이 없어서 아직 '
-                              '병원을 갈 필요가 없을 것 같아요.'
-                              '증상이 호전 중이라면 며칠 더 경과를 관찰하는 것이 좋습니다.',
+                              state.analysedText,
                               style: AppTextStyles.regular16(
                                 context,
                               ).copyWith(color: AppColors.white),

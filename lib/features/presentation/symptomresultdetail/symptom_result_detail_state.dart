@@ -12,6 +12,7 @@ class SymptomResultDetailState with _$SymptomResultDetailState {
     @Default([]) List<String> whatToDoList,
     @Default([]) List<Medicine> medicineList,
     @Default([]) List<String> foodList,
+    @Default('') String analysedText,
     @Default(false) isLoading,
   }) = _SymptomResultDetailState;
 }

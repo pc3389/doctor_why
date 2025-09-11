@@ -21,6 +21,7 @@ mixin _$SymptomResultDetailState {
   List<String> get whatToDoList => throw _privateConstructorUsedError;
   List<Medicine> get medicineList => throw _privateConstructorUsedError;
   List<String> get foodList => throw _privateConstructorUsedError;
+  String get analysedText => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
 
   /// Create a copy of SymptomResultDetailState
@@ -41,6 +42,7 @@ abstract class $SymptomResultDetailStateCopyWith<$Res> {
       List<String> whatToDoList,
       List<Medicine> medicineList,
       List<String> foodList,
+      String analysedText,
       dynamic isLoading});
 }
 
@@ -64,6 +66,7 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
     Object? whatToDoList = null,
     Object? medicineList = null,
     Object? foodList = null,
+    Object? analysedText = null,
     Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
@@ -83,6 +86,10 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
           ? _value.foodList
           : foodList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      analysedText: null == analysedText
+          ? _value.analysedText
+          : analysedText // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: freezed == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -105,6 +112,7 @@ abstract class _$$SymptomResultDetailStateImplCopyWith<$Res>
       List<String> whatToDoList,
       List<Medicine> medicineList,
       List<String> foodList,
+      String analysedText,
       dynamic isLoading});
 }
 
@@ -127,6 +135,7 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
     Object? whatToDoList = null,
     Object? medicineList = null,
     Object? foodList = null,
+    Object? analysedText = null,
     Object? isLoading = freezed,
   }) {
     return _then(_$SymptomResultDetailStateImpl(
@@ -146,6 +155,10 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
           ? _value._foodList
           : foodList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      analysedText: null == analysedText
+          ? _value.analysedText
+          : analysedText // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
     ));
   }
@@ -159,6 +172,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       final List<String> whatToDoList = const [],
       final List<Medicine> medicineList = const [],
       final List<String> foodList = const [],
+      this.analysedText = '',
       this.isLoading = false})
       : _diseasePredictionList = diseasePredictionList,
         _whatToDoList = whatToDoList,
@@ -204,11 +218,14 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
 
   @override
   @JsonKey()
+  final String analysedText;
+  @override
+  @JsonKey()
   final dynamic isLoading;
 
   @override
   String toString() {
-    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, isLoading: $isLoading)';
+    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, analysedText: $analysedText, isLoading: $isLoading)';
   }
 
   @override
@@ -223,6 +240,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
             const DeepCollectionEquality()
                 .equals(other._medicineList, _medicineList) &&
             const DeepCollectionEquality().equals(other._foodList, _foodList) &&
+            (identical(other.analysedText, analysedText) ||
+                other.analysedText == analysedText) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
@@ -233,6 +252,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       const DeepCollectionEquality().hash(_whatToDoList),
       const DeepCollectionEquality().hash(_medicineList),
       const DeepCollectionEquality().hash(_foodList),
+      analysedText,
       const DeepCollectionEquality().hash(isLoading));
 
   /// Create a copy of SymptomResultDetailState
@@ -251,6 +271,7 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
       final List<String> whatToDoList,
       final List<Medicine> medicineList,
       final List<String> foodList,
+      final String analysedText,
       final dynamic isLoading}) = _$SymptomResultDetailStateImpl;
 
   @override
@@ -261,6 +282,8 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
   List<Medicine> get medicineList;
   @override
   List<String> get foodList;
+  @override
+  String get analysedText;
   @override
   dynamic get isLoading;
 
