@@ -1,6 +1,7 @@
 import 'package:dbheatlcareproject/core/theme/app_colors.dart';
 import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
 import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
+import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/serverity.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_notifier.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_state.dart';
 import 'package:dbheatlcareproject/features/presentation/widgets/single_button.dart';
@@ -180,7 +181,7 @@ class _SymptomResultDetailScreenState
                                 Spacer(flex: 1),
                                 Text(
                                   // TODO 심각도 값 받아오기
-                                  '경미한 수준',
+                                  state.serverity?.displayName ?? '',
                                   style: AppTextStyles.regular16(
                                     context,
                                   ).copyWith(color: AppColors.white),
@@ -193,22 +194,33 @@ class _SymptomResultDetailScreenState
                                 // TODO 하나 선택
                                 Row(
                                   children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: SvgPicture.asset(
-                                        AppSvgs.resultTriangleIcon,
+                                    Visibility(
+                                      visible: state.serverity == Severity.mild,
+                                      child: Expanded(
+                                        flex: 1,
+                                        child: SvgPicture.asset(
+                                          AppSvgs.resultTriangleIcon,
+                                        ),
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: SvgPicture.asset(
-                                        AppSvgs.resultTriangleIcon,
+                                    Visibility(
+                                      visible:
+                                          state.serverity == Severity.moderate,
+                                      child: Expanded(
+                                        flex: 1,
+                                        child: SvgPicture.asset(
+                                          AppSvgs.resultTriangleIcon,
+                                        ),
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: SvgPicture.asset(
-                                        AppSvgs.resultTriangleIcon,
+                                    Visibility(
+                                      visible:
+                                          state.serverity == Severity.severe,
+                                      child: Expanded(
+                                        flex: 1,
+                                        child: SvgPicture.asset(
+                                          AppSvgs.resultTriangleIcon,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -358,7 +370,7 @@ class _SymptomResultDetailScreenState
                               ],
                             ),
                             SizedBox(height: 16.0),
-                            _buildFoodList(state.foodList),
+                            _builMedicineList(state.foodList),
                           ]),
                           SizedBox(height: spaceBetweenBoxes),
 

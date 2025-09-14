@@ -20,8 +20,9 @@ mixin _$SymptomResultDetailState {
       throw _privateConstructorUsedError;
   List<String> get whatToDoList => throw _privateConstructorUsedError;
   List<Medicine> get medicineList => throw _privateConstructorUsedError;
-  List<String> get foodList => throw _privateConstructorUsedError;
+  List<Medicine> get foodList => throw _privateConstructorUsedError;
   String get analysedText => throw _privateConstructorUsedError;
+  Severity? get serverity => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
 
   /// Create a copy of SymptomResultDetailState
@@ -41,8 +42,9 @@ abstract class $SymptomResultDetailStateCopyWith<$Res> {
       {List<DiseasePrediction> diseasePredictionList,
       List<String> whatToDoList,
       List<Medicine> medicineList,
-      List<String> foodList,
+      List<Medicine> foodList,
       String analysedText,
+      Severity? serverity,
       dynamic isLoading});
 }
 
@@ -67,6 +69,7 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
     Object? medicineList = null,
     Object? foodList = null,
     Object? analysedText = null,
+    Object? serverity = freezed,
     Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
@@ -85,11 +88,15 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
       foodList: null == foodList
           ? _value.foodList
           : foodList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Medicine>,
       analysedText: null == analysedText
           ? _value.analysedText
           : analysedText // ignore: cast_nullable_to_non_nullable
               as String,
+      serverity: freezed == serverity
+          ? _value.serverity
+          : serverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
       isLoading: freezed == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -111,8 +118,9 @@ abstract class _$$SymptomResultDetailStateImplCopyWith<$Res>
       {List<DiseasePrediction> diseasePredictionList,
       List<String> whatToDoList,
       List<Medicine> medicineList,
-      List<String> foodList,
+      List<Medicine> foodList,
       String analysedText,
+      Severity? serverity,
       dynamic isLoading});
 }
 
@@ -136,6 +144,7 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
     Object? medicineList = null,
     Object? foodList = null,
     Object? analysedText = null,
+    Object? serverity = freezed,
     Object? isLoading = freezed,
   }) {
     return _then(_$SymptomResultDetailStateImpl(
@@ -154,11 +163,15 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
       foodList: null == foodList
           ? _value._foodList
           : foodList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Medicine>,
       analysedText: null == analysedText
           ? _value.analysedText
           : analysedText // ignore: cast_nullable_to_non_nullable
               as String,
+      serverity: freezed == serverity
+          ? _value.serverity
+          : serverity // ignore: cast_nullable_to_non_nullable
+              as Severity?,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
     ));
   }
@@ -171,8 +184,9 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       {final List<DiseasePrediction> diseasePredictionList = const [],
       final List<String> whatToDoList = const [],
       final List<Medicine> medicineList = const [],
-      final List<String> foodList = const [],
+      final List<Medicine> foodList = const [],
       this.analysedText = '',
+      this.serverity,
       this.isLoading = false})
       : _diseasePredictionList = diseasePredictionList,
         _whatToDoList = whatToDoList,
@@ -207,10 +221,10 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
     return EqualUnmodifiableListView(_medicineList);
   }
 
-  final List<String> _foodList;
+  final List<Medicine> _foodList;
   @override
   @JsonKey()
-  List<String> get foodList {
+  List<Medicine> get foodList {
     if (_foodList is EqualUnmodifiableListView) return _foodList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_foodList);
@@ -220,12 +234,14 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
   @JsonKey()
   final String analysedText;
   @override
+  final Severity? serverity;
+  @override
   @JsonKey()
   final dynamic isLoading;
 
   @override
   String toString() {
-    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, analysedText: $analysedText, isLoading: $isLoading)';
+    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, analysedText: $analysedText, serverity: $serverity, isLoading: $isLoading)';
   }
 
   @override
@@ -242,6 +258,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
             const DeepCollectionEquality().equals(other._foodList, _foodList) &&
             (identical(other.analysedText, analysedText) ||
                 other.analysedText == analysedText) &&
+            (identical(other.serverity, serverity) ||
+                other.serverity == serverity) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
@@ -253,6 +271,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       const DeepCollectionEquality().hash(_medicineList),
       const DeepCollectionEquality().hash(_foodList),
       analysedText,
+      serverity,
       const DeepCollectionEquality().hash(isLoading));
 
   /// Create a copy of SymptomResultDetailState
@@ -270,8 +289,9 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
       {final List<DiseasePrediction> diseasePredictionList,
       final List<String> whatToDoList,
       final List<Medicine> medicineList,
-      final List<String> foodList,
+      final List<Medicine> foodList,
       final String analysedText,
+      final Severity? serverity,
       final dynamic isLoading}) = _$SymptomResultDetailStateImpl;
 
   @override
@@ -281,9 +301,11 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
   @override
   List<Medicine> get medicineList;
   @override
-  List<String> get foodList;
+  List<Medicine> get foodList;
   @override
   String get analysedText;
+  @override
+  Severity? get serverity;
   @override
   dynamic get isLoading;
 

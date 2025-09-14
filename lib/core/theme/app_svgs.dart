@@ -26,7 +26,7 @@ class AppSvgs {
   static const String resultCrossIcon = '$_basePath/icon_result_cross.svg';
   static const String resultBulbIcon = '$_basePath/icon_result_bulb.svg';
   static const String resultMedicineIcon = '$_basePath/icon_result_medicine.svg';
-  static const String resultFoodIcon = '$_basePath/icon_result_food.svg';
+  static const String resultFoodIcon = '$_basePath/ic_result_food.svg';
   static const String resultCardBg = '$_basePath/bg_result_card.png';
   static const String resultWhatToDoAfterImg =
       '$_basePath/img_result_what_to_do_after.svg';

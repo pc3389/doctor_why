@@ -1,3 +1,4 @@
+import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/serverity.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -25,32 +26,40 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
       // 가져온 데이터로 상태를 업데이트합니다.
       final newDiseasePredictions =
           gptResponse.expectedDiseases
-              .map((name) => DiseasePrediction(name: name, probability: 0))
+              .map(
+                (diseaseInfo) => DiseasePrediction(
+                  name: diseaseInfo.name,
+                  probability: diseaseInfo.probability.toDouble(),
+                ),
+              )
               .toList();
       final newWhatToDoList = List<String>.from(gptResponse.lifestyleTips);
       final newMedicineList =
           gptResponse.recommendedMedications
-              .map((name) => Medicine(name: name, description: ''))
+              .map(
+                (item) => Medicine(name: item.name, description: item.reason),
+              )
               .toList();
-      final newFoodList = List<String>.from(gptResponse.recommendedFoods);
-
-      // SymptomResultDetailState에 gptResponse의 다른 필드도 저장할 수 있습니다.
-      // 예: state.copyWith에 analysisContent: gptResponse.analysisContent 추가
+      final newFoodList =
+          gptResponse.recommendedFoods
+              .map(
+                (item) => Medicine(name: item.name, description: item.reason),
+              )
+              .toList();
+      final severity = SeverityExtension.fromString(gptResponse.severity);
       state = state.copyWith(
         analysedText: gptResponse.analysisContent,
         diseasePredictionList: newDiseasePredictions,
         whatToDoList: newWhatToDoList,
         medicineList: newMedicineList,
         foodList: newFoodList,
+        serverity: severity,
         // analysisContent: gptResponse.analysisContent, // SymptomResultDetailState에 필드 추가 필요
         // severity: gptResponse.severity, // SymptomResultDetailState에 필드 추가 필요
       );
     } catch (e, stackTrace) {
-      // 에러 처리 (예: 로그 출력, 사용자에게 알림, 상태에 에러 정보 반영)
       print('Error fetching or updating with GPT response: $e');
       print(stackTrace);
-      // SymptomResultDetailState에 에러 관련 필드가 있다면 업데이트 할 수 있습니다.
-      // state = state.copyWith(hasError: true, errorMessage: e.toString());
     }
   }
 
@@ -129,7 +138,8 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
   // 기존 리스트에 아이템을 추가하는 메소드 예시
   void addFood(String newFood) {
     // 현재 리스트를 복사한 후 새 아이템 추가
-    final updatedList = List<String>.from(state.foodList)..add(newFood);
+    final updatedList = state.foodList.where((it) => it != newFood).toList();
+    state = state.copyWith(foodList: updatedList);
 
     // 또는 spread operator 사용 (더 권장)
     // final updatedList = [...state.diseasePredictionList, newPrediction];

@@ -1,4 +1,5 @@
 import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/diseases_prediction.dart';
+import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/serverity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'medicine.dart';
@@ -11,8 +12,9 @@ class SymptomResultDetailState with _$SymptomResultDetailState {
     @Default([]) List<DiseasePrediction> diseasePredictionList,
     @Default([]) List<String> whatToDoList,
     @Default([]) List<Medicine> medicineList,
-    @Default([]) List<String> foodList,
+    @Default([]) List<Medicine> foodList,
     @Default('') String analysedText,
+    Severity? serverity,
     @Default(false) isLoading,
   }) = _SymptomResultDetailState;
 }

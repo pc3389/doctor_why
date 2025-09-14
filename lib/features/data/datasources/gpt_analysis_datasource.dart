@@ -17,10 +17,11 @@ class MockGptAnalysisDataSource implements GptAnalysisDataSource {
   @override
   Future<GptAnalysisResponse> getMockAnalysis() async {
     // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    print("sdkjhfksjdhf: Datasource init");
 
     final Map<String, dynamic> jsonMap =
         json.decode(mockSingleGptResponseJson) as Map<String, dynamic>;
+    print("sdkjhfksjdhf: map $jsonMap");
     return GptAnalysisResponse.fromJson(jsonMap);
   }
 
