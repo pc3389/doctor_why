@@ -25,6 +25,7 @@ mixin _$SymptomInputState {
   List<String> get currentArray => throw _privateConstructorUsedError;
   int get selectedArrayIndex => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isQuestionLoading => throw _privateConstructorUsedError;
   bool get allQuestionsCompleted => throw _privateConstructorUsedError;
   Map<int, String> get userAnswers =>
       throw _privateConstructorUsedError; // 질문 인덱스 : 답변
@@ -53,6 +54,7 @@ abstract class $SymptomInputStateCopyWith<$Res> {
       List<String> currentArray,
       int selectedArrayIndex,
       bool isLoading,
+      bool isQuestionLoading,
       bool allQuestionsCompleted,
       Map<int, String> userAnswers,
       String? error});
@@ -82,6 +84,7 @@ class _$SymptomInputStateCopyWithImpl<$Res, $Val extends SymptomInputState>
     Object? currentArray = null,
     Object? selectedArrayIndex = null,
     Object? isLoading = null,
+    Object? isQuestionLoading = null,
     Object? allQuestionsCompleted = null,
     Object? userAnswers = null,
     Object? error = freezed,
@@ -123,6 +126,10 @@ class _$SymptomInputStateCopyWithImpl<$Res, $Val extends SymptomInputState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isQuestionLoading: null == isQuestionLoading
+          ? _value.isQuestionLoading
+          : isQuestionLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       allQuestionsCompleted: null == allQuestionsCompleted
           ? _value.allQuestionsCompleted
           : allQuestionsCompleted // ignore: cast_nullable_to_non_nullable
@@ -157,6 +164,7 @@ abstract class _$$SymptomInputStateImplCopyWith<$Res>
       List<String> currentArray,
       int selectedArrayIndex,
       bool isLoading,
+      bool isQuestionLoading,
       bool allQuestionsCompleted,
       Map<int, String> userAnswers,
       String? error});
@@ -184,6 +192,7 @@ class __$$SymptomInputStateImplCopyWithImpl<$Res>
     Object? currentArray = null,
     Object? selectedArrayIndex = null,
     Object? isLoading = null,
+    Object? isQuestionLoading = null,
     Object? allQuestionsCompleted = null,
     Object? userAnswers = null,
     Object? error = freezed,
@@ -225,6 +234,10 @@ class __$$SymptomInputStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isQuestionLoading: null == isQuestionLoading
+          ? _value.isQuestionLoading
+          : isQuestionLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       allQuestionsCompleted: null == allQuestionsCompleted
           ? _value.allQuestionsCompleted
           : allQuestionsCompleted // ignore: cast_nullable_to_non_nullable
@@ -254,6 +267,7 @@ class _$SymptomInputStateImpl implements _SymptomInputState {
       final List<String> currentArray = const [],
       this.selectedArrayIndex = -1,
       this.isLoading = false,
+      this.isQuestionLoading = false,
       this.allQuestionsCompleted = false,
       final Map<int, String> userAnswers = const {},
       this.error})
@@ -309,6 +323,9 @@ class _$SymptomInputStateImpl implements _SymptomInputState {
   final bool isLoading;
   @override
   @JsonKey()
+  final bool isQuestionLoading;
+  @override
+  @JsonKey()
   final bool allQuestionsCompleted;
   final Map<int, String> _userAnswers;
   @override
@@ -325,7 +342,7 @@ class _$SymptomInputStateImpl implements _SymptomInputState {
 
   @override
   String toString() {
-    return 'SymptomInputState(messages: $messages, currentQuestionIndex: $currentQuestionIndex, isTextInputDisabled: $isTextInputDisabled, isNotText: $isNotText, currentOptions: $currentOptions, selectedOptionIndex: $selectedOptionIndex, currentArray: $currentArray, selectedArrayIndex: $selectedArrayIndex, isLoading: $isLoading, allQuestionsCompleted: $allQuestionsCompleted, userAnswers: $userAnswers, error: $error)';
+    return 'SymptomInputState(messages: $messages, currentQuestionIndex: $currentQuestionIndex, isTextInputDisabled: $isTextInputDisabled, isNotText: $isNotText, currentOptions: $currentOptions, selectedOptionIndex: $selectedOptionIndex, currentArray: $currentArray, selectedArrayIndex: $selectedArrayIndex, isLoading: $isLoading, isQuestionLoading: $isQuestionLoading, allQuestionsCompleted: $allQuestionsCompleted, userAnswers: $userAnswers, error: $error)';
   }
 
   @override
@@ -350,6 +367,8 @@ class _$SymptomInputStateImpl implements _SymptomInputState {
                 other.selectedArrayIndex == selectedArrayIndex) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isQuestionLoading, isQuestionLoading) ||
+                other.isQuestionLoading == isQuestionLoading) &&
             (identical(other.allQuestionsCompleted, allQuestionsCompleted) ||
                 other.allQuestionsCompleted == allQuestionsCompleted) &&
             const DeepCollectionEquality()
@@ -369,6 +388,7 @@ class _$SymptomInputStateImpl implements _SymptomInputState {
       const DeepCollectionEquality().hash(_currentArray),
       selectedArrayIndex,
       isLoading,
+      isQuestionLoading,
       allQuestionsCompleted,
       const DeepCollectionEquality().hash(_userAnswers),
       error);
@@ -394,6 +414,7 @@ abstract class _SymptomInputState implements SymptomInputState {
       final List<String> currentArray,
       final int selectedArrayIndex,
       final bool isLoading,
+      final bool isQuestionLoading,
       final bool allQuestionsCompleted,
       final Map<int, String> userAnswers,
       final String? error}) = _$SymptomInputStateImpl;
@@ -416,6 +437,8 @@ abstract class _SymptomInputState implements SymptomInputState {
   int get selectedArrayIndex;
   @override
   bool get isLoading;
+  @override
+  bool get isQuestionLoading;
   @override
   bool get allQuestionsCompleted;
   @override

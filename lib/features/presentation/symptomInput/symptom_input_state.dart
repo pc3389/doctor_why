@@ -17,6 +17,7 @@ class SymptomInputState with _$SymptomInputState {
     @Default([]) List<String> currentArray,
     @Default(-1) int selectedArrayIndex,
     @Default(false) bool isLoading,
+    @Default(false) bool isQuestionLoading,
     @Default(false) bool allQuestionsCompleted,
     @Default({}) Map<int, String> userAnswers, // 질문 인덱스 : 답변
     String? error, // 오류 메시지 (선택 사항)

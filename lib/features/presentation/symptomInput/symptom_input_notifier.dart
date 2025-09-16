@@ -7,9 +7,9 @@ import 'symptom_input_state.dart';
 
 // .family를 사용하여 Notifier 생성 시 초기 questionIndex와 initialMessages를 전달
 final symptomInputNotifierProvider =
-StateNotifierProvider<SymptomInputNotifier, SymptomInputState>((ref) {
-  return SymptomInputNotifier();
-});
+    StateNotifierProvider<SymptomInputNotifier, SymptomInputState>((ref) {
+      return SymptomInputNotifier();
+    });
 
 class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   final Uuid _uuid = const Uuid();
@@ -70,9 +70,7 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
     // }
 
     if (state.allQuestionsCompleted) {
-      state = state.copyWith(
-          messages: updatedMessages
-      );
+      state = state.copyWith(messages: updatedMessages);
       return;
     }
 
@@ -80,19 +78,20 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
       messages: updatedMessages,
       currentQuestionIndex: questionIndex,
       isTextInputDisabled:
-      currentQuestion.answerType == AnswerType.selectableOptions &&
+          (currentQuestion.answerType == AnswerType.selectableOptions ||
+              currentQuestion.answerType == AnswerType.array) &&
           currentQuestion.disableTextInputAfterOption,
       isNotText:
-      currentQuestion.answerType == AnswerType.selectableOptions ||
+          currentQuestion.answerType == AnswerType.selectableOptions ||
           currentQuestion.answerType == AnswerType.array,
       currentOptions:
-      currentQuestion.answerType == AnswerType.selectableOptions
-          ? (currentQuestion.options ?? [])
-          : [],
+          currentQuestion.answerType == AnswerType.selectableOptions
+              ? (currentQuestion.options ?? [])
+              : [],
       currentArray:
-      currentQuestion.answerType == AnswerType.array
-          ? (currentQuestion.arrayOptions ?? [])
-          : [],
+          currentQuestion.answerType == AnswerType.array
+              ? (currentQuestion.arrayOptions ?? [])
+              : [],
       isLoading: false,
       allQuestionsCompleted: false,
       // 새로운 질문 로드 시 완료 상태 해제
@@ -101,13 +100,16 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   }
 
   void proceedToNextQuestion() {
+    print('asdkjfhsdkjf: proceedToNext ${state.currentQuestionIndex}');
     resetSymptomInputSession(state.currentQuestionIndex);
     loadQuestion();
   }
 
-  void _addMessageToState(String text,
-      MessageSender sender,
-      AnswerType answerType,) {
+  void _addMessageToState(
+    String text,
+    MessageSender sender,
+    AnswerType answerType,
+  ) {
     final newMessage = ChatMessage(
       id: _uuid.v4(),
       text: text.trim(),
@@ -117,22 +119,56 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
     state = state.copyWith(messages: [...state.messages, newMessage]);
   }
 
-  void handleUserTextMessageSubmitted(String text) {
-    if (state.isTextInputDisabled || state.isLoading || text
-        .trim()
-        .isEmpty)
-      return;
+  void handleUserTextMessageSubmitted(String text) async {
+    if (state.isQuestionLoading) return;
+    state = state.copyWith(
+      isQuestionLoading: true,
+      isTextInputDisabled: true,
+    );
 
     _recordAnswer(state.currentQuestionIndex, text);
+
+    _addMessageToState(text, MessageSender.user, AnswerType.textInput);
+
+    await Future.delayed(Duration(milliseconds: 500));
+
+    state = state.copyWith(isQuestionLoading: false);
     _prepareForNextQuestion();
+    proceedToNextQuestion();
   }
 
-  void handleOptionSelected(QuestionOption optionToSelect, int index) {
-    // if (state.isLoading) return;
+  void handleOptionSelected(QuestionOption optionToSelect, int index) async {
+    if (state.isQuestionLoading) return;
+
+    state = state.copyWith(selectedOptionIndex: index, isQuestionLoading: true);
+
+    await Future.delayed(Duration(milliseconds: 500));
 
     _recordAnswer(state.currentQuestionIndex, optionToSelect.text);
 
+    state = state.copyWith(isQuestionLoading: false);
+
     _prepareForNextQuestion();
+    proceedToNextQuestion();
+  }
+
+  void handleArraySelected(int index) async {
+    if (state.isQuestionLoading) return;
+    state = state.copyWith(selectedArrayIndex: index, isQuestionLoading: true);
+
+    _recordAnswer(state.currentQuestionIndex, (index + 1).toString());
+
+    await Future.delayed(Duration(milliseconds: 500));
+
+    print('asdkjfhsdkjf: array selected, index $index');
+    print(
+      'asdkjfhsdkjf: answer ${state.userAnswers[state.currentQuestionIndex]}',
+    );
+
+    state = state.copyWith(isQuestionLoading: false);
+
+    _prepareForNextQuestion();
+    proceedToNextQuestion();
   }
 
   void _recordAnswer(int questionIndex, String answer) {
@@ -144,9 +180,8 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   void _prepareForNextQuestion() {
     final nextIndex = state.currentQuestionIndex + 1;
     if (nextIndex < symptomAnalysisQuestions.length) {
-      state = state.copyWith(
-        currentQuestionIndex: nextIndex,
-      );
+      print('asdkjfhsdkjf: next question $nextIndex');
+      state = state.copyWith(currentQuestionIndex: nextIndex);
     } else {
       _handleAllQuestionsCompleted();
     }
@@ -154,8 +189,6 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
 
   void _handleAllQuestionsCompleted() {
     print('asdkjfhsdkjf: completed');
-    state = state.copyWith(
-      allQuestionsCompleted: true,
-    );
+    state = state.copyWith(allQuestionsCompleted: true);
   }
 }

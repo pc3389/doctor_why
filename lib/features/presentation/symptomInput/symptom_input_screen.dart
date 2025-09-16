@@ -1,4 +1,6 @@
+import 'package:dbheatlcareproject/core/theme/app_colors.dart';
 import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
+import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomInput/symptom_input_notifier.dart';
 import 'package:dbheatlcareproject/features/presentation/widgets/image_with_text_box.dart';
 import 'package:flutter/material.dart';
@@ -82,14 +84,20 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
         .handleUserTextMessageSubmitted(text);
     _textController.clear();
 
-    _proceedToNextQuestion();
+    // _proceedToNextQuestion();
   }
 
   void _handleOptionSelected(QuestionOption option, int index) {
     ref
         .read(symptomInputNotifierProvider.notifier)
         .handleOptionSelected(option, index);
-    _proceedToNextQuestion();
+    // _proceedToNextQuestion();
+  }
+
+  void _handleArraySelected(int index) {
+    ref.read(symptomInputNotifierProvider.notifier).handleArraySelected(index);
+
+    // _proceedToNextQuestion();
   }
 
   void _proceedToNextQuestion() {
@@ -169,9 +177,76 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
                     for (int i = 0; i < length; i += 2) {
                       List<Widget> rowItems = [];
                       // TODO Replace Text to clickable
-                      rowItems.add(Text(symptomState.currentArray[i]));
+                      rowItems.add(
+                        Expanded(
+                          flex: 1, // width ratio: 1 (모든 아이템이 동일한 비율로 공간 차지)
+                          child: GestureDetector(
+                            // 또는 InkWell
+                            onTap: () {
+                              _handleArraySelected(i);
+                            },
+                            child: Container(
+                              height: 42.0,
+                              // Height 42
+                              margin: EdgeInsets.only(right: 8.0, bottom: 8.0),
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(
+                                  color:
+                                      symptomState.selectedArrayIndex == i
+                                          ? AppColors.indigo400
+                                          : AppColors.indigo100,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              alignment: Alignment.center,
+                              // text align: center
+                              child: Text(
+                                symptomState.currentArray[i],
+                                style: AppTextStyles.regular16(context),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
                       if (i + 1 < length) {
-                        rowItems.add(Text(symptomState.currentArray[i + 1]));
+                        rowItems.add(
+                          Expanded(
+                            flex: 1, // width ratio: 1 (모든 아이템이 동일한 비율로 공간 차지)
+                            child: GestureDetector(
+                              // 또는 InkWell
+                              onTap: () {
+                                // 클릭 시 실행할 로직
+                                _handleArraySelected(i + 1);
+                              },
+                              child: Container(
+                                height: 42.0,
+                                margin: EdgeInsets.only(
+                                  right: 8.0,
+                                  bottom: 8.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  border: Border.all(
+                                    color:
+                                        symptomState.selectedArrayIndex == i + 1
+                                            ? AppColors.indigo400
+                                            : AppColors.indigo100,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                alignment: Alignment.center,
+                                // text align: center
+                                child: Text(
+                                  symptomState.currentArray[i + 1],
+                                  style: AppTextStyles.regular16(context),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
                       }
                       widgets.add(Row(children: rowItems));
                     }
