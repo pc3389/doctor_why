@@ -50,7 +50,9 @@ class AppColors {
   static const Color green400 = Color(0xFF05DF72);
   static const Color yellow300 = Color(0xFFFFDF20);
 
+  static const Color detailBackground = Color(0xFF1B1671);
+
   static Color transparentAppBarBgColor = Color(
-    0xFAFAFA03,
-  ).withValues(alpha: 0.01);
+    0xFAFAFAFA,
+  ).withValues(alpha: 0.05);
 }

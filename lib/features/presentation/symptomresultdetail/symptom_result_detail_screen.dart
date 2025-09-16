@@ -34,7 +34,7 @@ class _SymptomResultDetailScreenState
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notifier = ref.read(symptomResultDetailNotifierProvider.notifier);
       notifier.updateStateWithGptResponse();
@@ -78,351 +78,414 @@ class _SymptomResultDetailScreenState
     );
 
     return Scaffold(
-      // body: SafeArea(
-      body: Expanded(
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(height: 96.0, color: AppColors.appBarDark),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Image.asset(
-                      AppSvgs.symptomResultDetailImage,
-                      fit: BoxFit.fill,
+      appBar: AppBar(
+        backgroundColor: AppColors.detailBackground,
+        surfaceTintColor: Colors.transparent,
+        leading: IconButton(
+          icon: SvgPicture.asset(AppSvgs.backButtonWhiteIcon),
+          onPressed: () => GoRouter.of(context).pop(),
+          tooltip: '뒤로 가기',
+        ),
+      ),
+      body: SafeArea(
+        child: Expanded(
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Container(color: AppColors.detailBackground),
+                ),
+                Positioned(
+                  bottom: 56.0,
+                  right: 0,
+                  child: SvgPicture.asset(AppSvgs.resultYImage),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Container(height: 96.0, color: AppColors.appBarDark),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Image.asset(
+                        AppSvgs.symptomResultDetailImage,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(gradient: _boxGradient()),
-                    width: double.infinity,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 24.0),
-                          Text(
-                            '####.##.## 일자로 예측한',
-                            style: AppTextStyles.bold20(
-                              context,
-                            ).copyWith(color: AppColors.white),
-                          ),
-                          Text(
-                            '질병 결과입니다.',
-                            style: AppTextStyles.bold20(
-                              context,
-                            ).copyWith(color: AppColors.white),
-                          ),
-                          SizedBox(height: 40.0),
-
-                          // 분석 내용
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.resultSearchIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '분석 내용',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 12.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        // gradient: _boxGradient()
+                        color: AppColors.transparent,
+                      ),
+                      width: double.infinity,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 24.0),
                             Text(
-                              state.analysedText,
-                              style: AppTextStyles.regular16(
+                              '####.##.## 일자로 예측한',
+                              style: AppTextStyles.bold20(
                                 context,
                               ).copyWith(color: AppColors.white),
                             ),
-                          ]),
-
-                          SizedBox(height: spaceBetweenBoxes),
-
-                          // 예상되는 질병
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.diseasesResultIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '예상되는 질병',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
+                            Text(
+                              '질병 결과입니다.',
+                              style: AppTextStyles.bold20(
+                                context,
+                              ).copyWith(color: AppColors.white),
                             ),
-                            SizedBox(height: 16.0),
-                            _getDiseasesResultList(state.diseasePredictionList),
-                            SizedBox(height: 4.0),
-                          ]),
+                            SizedBox(height: 40.0),
 
-                          SizedBox(height: spaceBetweenBoxes),
-                          // 심각도
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.resultDangerIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '심각도',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                                Spacer(flex: 1),
-                                Text(
-                                  // TODO 심각도 값 받아오기
-                                  state.serverity?.displayName ?? '',
-                                  style: AppTextStyles.regular16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 16.0),
-                            Column(
-                              children: [
-                                // TODO 하나 선택
-                                Row(
-                                  children: [
-                                    Visibility(
-                                      visible: state.serverity == Severity.mild,
-                                      child: Expanded(
-                                        flex: 1,
-                                        child: SvgPicture.asset(
-                                          AppSvgs.resultTriangleIcon,
-                                        ),
-                                      ),
-                                    ),
-                                    Visibility(
-                                      visible:
-                                          state.serverity == Severity.moderate,
-                                      child: Expanded(
-                                        flex: 1,
-                                        child: SvgPicture.asset(
-                                          AppSvgs.resultTriangleIcon,
-                                        ),
-                                      ),
-                                    ),
-                                    Visibility(
-                                      visible:
-                                          state.serverity == Severity.severe,
-                                      child: Expanded(
-                                        flex: 1,
-                                        child: SvgPicture.asset(
-                                          AppSvgs.resultTriangleIcon,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 8.0),
-                                SizedBox(
-                                  height: 16.0,
-                                  child: Row(
+                            // 분석 내용
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.resultSearchIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '분석 내용',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 12.0),
+                              Text(
+                                state.analysedText,
+                                style: AppTextStyles.regular16(
+                                  context,
+                                ).copyWith(color: AppColors.white),
+                              ),
+                            ]),
+
+                            SizedBox(height: spaceBetweenBoxes),
+
+                            // 예상되는 질병
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.diseasesResultIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '예상되는 질병',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16.0),
+                              _getDiseasesResultList(
+                                state.diseasePredictionList,
+                              ),
+                              SizedBox(height: 4.0),
+                            ]),
+
+                            SizedBox(height: spaceBetweenBoxes),
+
+                            // 심각도
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.resultDangerIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '심각도',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                  Spacer(flex: 1),
+                                  Text(
+                                    // TODO 심각도 값 받아오기
+                                    state.serverity?.displayName ?? '',
+                                    style: AppTextStyles.regular16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: 16.0),
+
+                              Column(
+                                children: [
+                                  // TODO 하나 선택
+                                  Row(
                                     children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: AppColors.green400,
+                                      Visibility(
+                                        visible:
+                                            state.serverity == Severity.mild,
+                                        child: Expanded(
+                                          flex: 1,
+                                          child: SvgPicture.asset(
+                                            AppSvgs.resultTriangleIcon,
+                                          ),
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: AppColors.yellow300,
+                                      Visibility(
+                                        visible:
+                                            state.serverity ==
+                                            Severity.moderate,
+                                        child: Expanded(
+                                          flex: 1,
+                                          child: SvgPicture.asset(
+                                            AppSvgs.resultTriangleIcon,
+                                          ),
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: AppColors.red500,
+                                      Visibility(
+                                        visible:
+                                            state.serverity == Severity.severe,
+                                        child: Expanded(
+                                          flex: 1,
+                                          child: SvgPicture.asset(
+                                            AppSvgs.resultTriangleIcon,
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                SizedBox(height: 24.0),
-                              ],
-                            ),
-                          ]),
-
-                          SizedBox(height: 40.0),
-
-                          Container(
-                            width: double.infinity,
-                            child: SvgPicture.asset(
-                              AppSvgs.resultWhatToDoAfterImg,
-                            ),
-                          ),
-
-                          SizedBox(height: 40.0),
-
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.resultCrossIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '관련 진료과',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 12.0),
-                            _whiteText(
-                              '위와 같은 질병이라면 해당 진료과를 방문하는 것을 권장드려요.',
-                              AppTextStyles.regular16(context),
-                            ),
-                            SizedBox(height: 12.0),
-                            Row(
-                              children: [
-                                _buildItemBoxWithBorder(
-                                  Text(
-                                    '이비인후과',
-                                    style: AppTextStyles.bold14(
-                                      context,
-                                    ).copyWith(color: AppColors.white),
+                                  SizedBox(height: 8.0),
+                                  SizedBox(
+                                    height: 8.0,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            color: AppColors.green400,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            color: AppColors.yellow300,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            color: AppColors.red500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 8.0),
-                                _buildItemBoxWithBorder(
-                                  Text(
-                                    '가정의학과',
-                                    style: AppTextStyles.bold14(
-                                      context,
-                                    ).copyWith(color: AppColors.white),
-                                  ),
-                                ),
-                                SizedBox(width: 8.0),
-                                _buildItemBoxWithBorder(
-                                  Text(
-                                    '내과',
-                                    style: AppTextStyles.bold14(
-                                      context,
-                                    ).copyWith(color: AppColors.white),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ]),
-                          SizedBox(height: spaceBetweenBoxes),
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.resultBulbIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '생활 습관 팁 및 주의 사항',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: 16.0),
-                            _buildWhatToDoList(state.whatToDoList),
-                          ]),
-                          SizedBox(height: spaceBetweenBoxes),
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.resultMedicineIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '추천 의약품 또는 건강기능식품',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 16.0),
-                            _builMedicineList(state.medicineList),
-                          ]),
-                          SizedBox(height: spaceBetweenBoxes),
-                          _container([
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppSvgs.resultFoodIcon),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  '추천 식품',
-                                  style: AppTextStyles.bold16(
-                                    context,
-                                  ).copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 16.0),
-                            _builMedicineList(state.foodList),
-                          ]),
-                          SizedBox(height: spaceBetweenBoxes),
-
-                          SizedBox(
-                            width: double.infinity,
-                            child: _container([
-                              _whiteText(
-                                '결과가 어떠셨나요?',
-                                AppTextStyles.bold20(context),
+                                  SizedBox(height: 24.0),
+                                ],
                               ),
-                              SizedBox(height: 8.0),
+                            ]),
+
+                            SizedBox(height: 40.0),
+
+                            Container(
+                              width: double.infinity,
+                              child: SvgPicture.asset(
+                                AppSvgs.resultWhatToDoAfterImg,
+                              ),
+                            ),
+
+                            SizedBox(height: 40.0),
+
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.resultCrossIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '관련 진료과',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 12.0),
                               _whiteText(
-                                '더 나은 서비스를 위해 평가를 부탁드려요.',
+                                '위와 같은 질병이라면 해당 진료과를 방문하는 것을 권장드려요.',
                                 AppTextStyles.regular16(context),
                               ),
-                              SizedBox(height: 24.0),
-                              singleButton(
-                                context: context,
-                                onPressed: () {
-                                  // TODO Onpressed
-                                },
-                                text: '리뷰 남기기',
+                              SizedBox(height: 12.0),
+                              Row(
+                                children: [
+                                  _buildItemBoxWithBorder(
+                                    Text(
+                                      '이비인후과',
+                                      style: AppTextStyles.bold14(
+                                        context,
+                                      ).copyWith(color: AppColors.white),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  _buildItemBoxWithBorder(
+                                    Text(
+                                      '가정의학과',
+                                      style: AppTextStyles.bold14(
+                                        context,
+                                      ).copyWith(color: AppColors.white),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  _buildItemBoxWithBorder(
+                                    Text(
+                                      '내과',
+                                      style: AppTextStyles.bold14(
+                                        context,
+                                      ).copyWith(color: AppColors.white),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ], crssAxisAlignment: CrossAxisAlignment.center),
-                          ),
-                          SizedBox(height: 64.0),
-                        ],
+                            ]),
+                            SizedBox(height: spaceBetweenBoxes),
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.resultBulbIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '생활 습관 팁 및 주의 사항',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16.0),
+                              _buildWhatToDoList(state.whatToDoList),
+                            ]),
+                            SizedBox(height: spaceBetweenBoxes),
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.resultMedicineIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '추천 의약품 또는 건강기능식품',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16.0),
+                              _builMedicineList(state.medicineList),
+                            ]),
+                            SizedBox(height: spaceBetweenBoxes),
+                            _container([
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.resultFoodIcon),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    '추천 식품',
+                                    style: AppTextStyles.bold16(
+                                      context,
+                                    ).copyWith(color: AppColors.white),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16.0),
+                              _builMedicineList(state.foodList),
+                            ]),
+                            SizedBox(height: spaceBetweenBoxes),
+                            if (state.recommendedNextStep != null)
+                              _container([
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      AppSvgs.resultNextStepIcon,
+                                    ),
+                                    SizedBox(width: 8.0),
+                                    Text(
+                                      '권장 다음 단계',
+                                      style: AppTextStyles.bold16(
+                                        context,
+                                      ).copyWith(color: AppColors.white),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 12.0),
+                                Text(
+                                  state.recommendedNextStep!,
+                                  style: AppTextStyles.regular16(
+                                    context,
+                                  ).copyWith(color: AppColors.white),
+                                ),
+                              ]),
+                            SizedBox(height: spaceBetweenBoxes),
+                            if (state.precautions != null)
+                              _container([
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(AppSvgs.resultDotsIcon),
+                                    SizedBox(width: 8.0),
+                                    Text(
+                                      '참고 사항',
+                                      style: AppTextStyles.bold16(
+                                        context,
+                                      ).copyWith(color: AppColors.white),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 12.0),
+                                Text(
+                                  state.precautions!,
+                                  style: AppTextStyles.regular16(
+                                    context,
+                                  ).copyWith(color: AppColors.white),
+                                ),
+                              ]),
+
+                            SizedBox(height: spaceBetweenBoxes),
+
+                            SizedBox(
+                              width: double.infinity,
+                              child: _container([
+                                _whiteText(
+                                  '결과가 어떠셨나요?',
+                                  AppTextStyles.bold20(context),
+                                ),
+                                SizedBox(height: 8.0),
+                                _whiteText(
+                                  '더 나은 서비스를 위해 평가를 부탁드려요.',
+                                  AppTextStyles.regular16(context),
+                                ),
+                                SizedBox(height: 24.0),
+                                singleButton(
+                                  context: context,
+                                  onPressed: () {
+                                    // TODO Onpressed
+                                  },
+                                  text: '리뷰 남기기',
+                                ),
+                              ], crssAxisAlignment: CrossAxisAlignment.center),
+                            ),
+                            SizedBox(height: 64.0),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              padding: EdgeInsets.only(top: 48.0),
-              width: double.infinity,
-              height: 96.0,
-              color: AppColors.transparentAppBarBgColor,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: SvgPicture.asset(AppSvgs.backButtonWhiteIcon),
-                  onPressed: () => GoRouter.of(context).pop(),
-                  tooltip: '뒤로 가기',
+                  ],
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
-      // ),
     );
   }
 

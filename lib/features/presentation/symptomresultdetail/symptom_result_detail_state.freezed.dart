@@ -22,6 +22,8 @@ mixin _$SymptomResultDetailState {
   List<Medicine> get medicineList => throw _privateConstructorUsedError;
   List<Medicine> get foodList => throw _privateConstructorUsedError;
   String get analysedText => throw _privateConstructorUsedError;
+  String? get recommendedNextStep => throw _privateConstructorUsedError;
+  String? get precautions => throw _privateConstructorUsedError;
   Severity? get serverity => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
 
@@ -44,6 +46,8 @@ abstract class $SymptomResultDetailStateCopyWith<$Res> {
       List<Medicine> medicineList,
       List<Medicine> foodList,
       String analysedText,
+      String? recommendedNextStep,
+      String? precautions,
       Severity? serverity,
       dynamic isLoading});
 }
@@ -69,6 +73,8 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
     Object? medicineList = null,
     Object? foodList = null,
     Object? analysedText = null,
+    Object? recommendedNextStep = freezed,
+    Object? precautions = freezed,
     Object? serverity = freezed,
     Object? isLoading = freezed,
   }) {
@@ -93,6 +99,14 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
           ? _value.analysedText
           : analysedText // ignore: cast_nullable_to_non_nullable
               as String,
+      recommendedNextStep: freezed == recommendedNextStep
+          ? _value.recommendedNextStep
+          : recommendedNextStep // ignore: cast_nullable_to_non_nullable
+              as String?,
+      precautions: freezed == precautions
+          ? _value.precautions
+          : precautions // ignore: cast_nullable_to_non_nullable
+              as String?,
       serverity: freezed == serverity
           ? _value.serverity
           : serverity // ignore: cast_nullable_to_non_nullable
@@ -120,6 +134,8 @@ abstract class _$$SymptomResultDetailStateImplCopyWith<$Res>
       List<Medicine> medicineList,
       List<Medicine> foodList,
       String analysedText,
+      String? recommendedNextStep,
+      String? precautions,
       Severity? serverity,
       dynamic isLoading});
 }
@@ -144,6 +160,8 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
     Object? medicineList = null,
     Object? foodList = null,
     Object? analysedText = null,
+    Object? recommendedNextStep = freezed,
+    Object? precautions = freezed,
     Object? serverity = freezed,
     Object? isLoading = freezed,
   }) {
@@ -168,6 +186,14 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
           ? _value.analysedText
           : analysedText // ignore: cast_nullable_to_non_nullable
               as String,
+      recommendedNextStep: freezed == recommendedNextStep
+          ? _value.recommendedNextStep
+          : recommendedNextStep // ignore: cast_nullable_to_non_nullable
+              as String?,
+      precautions: freezed == precautions
+          ? _value.precautions
+          : precautions // ignore: cast_nullable_to_non_nullable
+              as String?,
       serverity: freezed == serverity
           ? _value.serverity
           : serverity // ignore: cast_nullable_to_non_nullable
@@ -186,6 +212,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       final List<Medicine> medicineList = const [],
       final List<Medicine> foodList = const [],
       this.analysedText = '',
+      this.recommendedNextStep,
+      this.precautions,
       this.serverity,
       this.isLoading = false})
       : _diseasePredictionList = diseasePredictionList,
@@ -234,6 +262,10 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
   @JsonKey()
   final String analysedText;
   @override
+  final String? recommendedNextStep;
+  @override
+  final String? precautions;
+  @override
   final Severity? serverity;
   @override
   @JsonKey()
@@ -241,7 +273,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
 
   @override
   String toString() {
-    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, analysedText: $analysedText, serverity: $serverity, isLoading: $isLoading)';
+    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, analysedText: $analysedText, recommendedNextStep: $recommendedNextStep, precautions: $precautions, serverity: $serverity, isLoading: $isLoading)';
   }
 
   @override
@@ -258,6 +290,10 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
             const DeepCollectionEquality().equals(other._foodList, _foodList) &&
             (identical(other.analysedText, analysedText) ||
                 other.analysedText == analysedText) &&
+            (identical(other.recommendedNextStep, recommendedNextStep) ||
+                other.recommendedNextStep == recommendedNextStep) &&
+            (identical(other.precautions, precautions) ||
+                other.precautions == precautions) &&
             (identical(other.serverity, serverity) ||
                 other.serverity == serverity) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
@@ -271,6 +307,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       const DeepCollectionEquality().hash(_medicineList),
       const DeepCollectionEquality().hash(_foodList),
       analysedText,
+      recommendedNextStep,
+      precautions,
       serverity,
       const DeepCollectionEquality().hash(isLoading));
 
@@ -291,6 +329,8 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
       final List<Medicine> medicineList,
       final List<Medicine> foodList,
       final String analysedText,
+      final String? recommendedNextStep,
+      final String? precautions,
       final Severity? serverity,
       final dynamic isLoading}) = _$SymptomResultDetailStateImpl;
 
@@ -304,6 +344,10 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
   List<Medicine> get foodList;
   @override
   String get analysedText;
+  @override
+  String? get recommendedNextStep;
+  @override
+  String? get precautions;
   @override
   Severity? get serverity;
   @override

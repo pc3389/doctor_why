@@ -1,5 +1,4 @@
 import 'package:dbheatlcareproject/features/navigation/app_router.dart';
-import 'package:dbheatlcareproject/features/presentation/appbar/custom_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,8 +13,8 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: SystemUiOverlay.values,
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
   );
   runApp(
     ProviderScope(

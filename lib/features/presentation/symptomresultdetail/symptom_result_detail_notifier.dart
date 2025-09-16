@@ -54,8 +54,8 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
         medicineList: newMedicineList,
         foodList: newFoodList,
         serverity: severity,
-        // analysisContent: gptResponse.analysisContent, // SymptomResultDetailState에 필드 추가 필요
-        // severity: gptResponse.severity, // SymptomResultDetailState에 필드 추가 필요
+        recommendedNextStep: gptResponse.recommendedNextStep,
+        precautions: gptResponse.precautions,
       );
     } catch (e, stackTrace) {
       print('Error fetching or updating with GPT response: $e');
