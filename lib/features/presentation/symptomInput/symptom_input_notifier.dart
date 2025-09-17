@@ -121,10 +121,7 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
 
   void handleUserTextMessageSubmitted(String text) async {
     if (state.isQuestionLoading) return;
-    state = state.copyWith(
-      isQuestionLoading: true,
-      isTextInputDisabled: true,
-    );
+    state = state.copyWith(isQuestionLoading: true, isTextInputDisabled: true);
 
     _recordAnswer(state.currentQuestionIndex, text);
 
