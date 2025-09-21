@@ -43,19 +43,20 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
   Widget build(BuildContext context) {
     final resultState = ref.watch(symptomResultNotifierProvider);
     final resultNotifier = ref.read(symptomResultNotifierProvider.notifier);
+    final today = DateTime.now();
 
     return Scaffold(
       appBar: CustomAppBar(),
       body: SafeArea(
         child: Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -98,8 +99,7 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                                               color: AppColors.indigo800,
                                             ),
                                             child: Text(
-                                              // TODO Date
-                                              '2015.09.01',
+                                              '${today.year}.${today.month}.${today.day}',
                                               style: AppTextStyles.bold16(
                                                 context,
                                               ).copyWith(
@@ -127,6 +127,9 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                                     SymptomResultDetailScreen.routePath,
                                   );
                                 },
+                                backgroundColor: AppColors.white,
+                                textColor: AppColors.slate500,
+                                borderColor: AppColors.indigo100,
                                 text: '결과 확인하기',
                               ),
                               // Column 내부에 들어갈 위젯들
@@ -137,7 +140,7 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                         SizedBox(height: 28.0),
 
                         SvgPicture.asset(AppSvgs.appLogoCircleIcon),
-                        const SizedBox(height: 16.0), // 채팅 메시지 목록 전 간격
+                        const SizedBox(height: 8.0), // 채팅 메시지 목록 전 간격
                         // 로딩 인디케이터 (선택적)
                         if (resultState.isLoading &&
                             resultState.messages.isEmpty)
@@ -158,7 +161,8 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                               final buttonWidget = Padding(
                                 // 버튼 위아래 간격 추가
                                 padding: const EdgeInsets.only(top: 8.0),
-                                child: ElevatedButton(
+                                child: singleButton(
+                                  context: context,
                                   onPressed: () {
                                     // 버튼 액션 처리
                                     if (message.buttonPayload is Map &&
@@ -168,26 +172,15 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                                     }
                                     // 다른 버튼 액션들도 여기에 추가 가능
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.indigo500,
-                                    // AI 메시지 버블과 유사한 색상
-                                    foregroundColor: AppColors.white,
-                                    // 텍스트 색상
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0,
-                                      vertical: 10.0,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    (message.buttonPayload is Map &&
-                                            message.buttonPayload['text'] !=
-                                                null)
-                                        ? message.buttonPayload['text']
-                                        : "액션 버튼", // 기본 버튼 텍스트
-                                  ),
+                                  text:
+                                      (message.buttonPayload is Map &&
+                                              message.buttonPayload['text'] !=
+                                                  null)
+                                          ? message.buttonPayload['text']
+                                          : "액션 버튼",
+                                  backgroundColor: AppColors.white,
+                                  textColor: AppColors.indigo500,
+                                  borderColor: AppColors.indigo500,
                                 ),
                               );
                               return ChatMessageBubble(
@@ -204,19 +197,20 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                     ),
                   ),
                 ),
-                buildTextComposer(
-                  context: context,
-                  textController: _textController,
-                  textFieldFocusNode: _textFieldFocusNode,
-                  handleUserMessageSubmitted: (text) {
-                    _handleUserMessageSubmitted(text);
-                  },
-                ),
-              ],
-            ),
+              ),
+              buildTextComposer(
+                context: context,
+                textController: _textController,
+                textFieldFocusNode: _textFieldFocusNode,
+                handleUserMessageSubmitted: (text) {
+                  _handleUserMessageSubmitted(text);
+                },
+              ),
+            ],
           ),
         ),
       ),
+      // ),
     );
   }
 

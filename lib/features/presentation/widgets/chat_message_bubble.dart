@@ -36,7 +36,7 @@ class ChatMessageBubble extends StatelessWidget {
             );
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: alignment,
         children: <Widget>[
@@ -52,15 +52,6 @@ class ChatMessageBubble extends StatelessWidget {
               decoration: BoxDecoration(
                 color: bubbleColor,
                 borderRadius: borderRadius,
-                boxShadow: [
-                  // 은은한 그림자 효과 (선택 사항)
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,6 +62,16 @@ class ChatMessageBubble extends StatelessWidget {
                       context,
                     ).copyWith(color: textColor),
                   ),
+                  if (message.hint != null)
+                    Padding(
+                      padding: EdgeInsets.only(top: 4.0),
+                      child: Text(
+                        message.hint!,
+                        style: AppTextStyles.regular14(
+                          context,
+                        ).copyWith(color: AppColors.slate500),
+                      ),
+                    ),
                   if (widgets.isNotEmpty) ...widgets,
                 ],
               ),

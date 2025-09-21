@@ -64,6 +64,7 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
       id: _uuid.v4(),
       text: currentQuestion.initialAiMessage,
       sender: MessageSender.ai,
+      hint: currentQuestion.hint,
       answerType: currentQuestion.answerType,
     );
     updatedMessages.add(aiMessage);
@@ -121,6 +122,7 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
 
   void handleUserTextMessageSubmitted(String text) async {
     if (state.isQuestionLoading) return;
+    if (text.isEmpty) return;
     state = state.copyWith(isQuestionLoading: true, isTextInputDisabled: true);
 
     _recordAnswer(state.currentQuestionIndex, text);
@@ -138,6 +140,25 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
     if (state.isQuestionLoading) return;
 
     state = state.copyWith(selectedOptionIndex: index, isQuestionLoading: true);
+    if (index == 0 &&
+        state.currentQuestionIndex == 1 &&
+        state.isTextInputDisabled == true) {
+      final currentQuestion = symptomAnalysisQuestions[1];
+      _addMessageToState(
+        currentQuestion.additionalQuestion ?? "",
+        MessageSender.ai,
+        AnswerType.textInput,
+      );
+      state = state.copyWith(
+        isTextInputDisabled: false,
+        isNotText: false,
+        isLoading: false,
+        isQuestionLoading: false,
+        allQuestionsCompleted: false,
+        error: null,
+      );
+      return;
+    }
 
     await Future.delayed(Duration(milliseconds: 500));
 
@@ -171,6 +192,7 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   void _recordAnswer(int questionIndex, String answer) {
     final updatedAnswers = Map<int, String>.from(state.userAnswers);
     updatedAnswers[questionIndex] = answer;
+    print('OpenAiaa: $questionIndex: ${updatedAnswers[questionIndex]}');
     state = state.copyWith(userAnswers: updatedAnswers);
   }
 

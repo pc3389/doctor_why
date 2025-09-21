@@ -19,12 +19,12 @@ class SymptomResultNotifier extends StateNotifier<SymptomResultState> {
 
   void _initializeMessages() {
     final initialAiMessages = [
-      ChatMessage(
-        id: _uuid.v4(),
-        text: "더 궁금한 사항이 있으세요?\n자유롭게 질문해주세요!",
-        sender: MessageSender.ai,
-        answerType: AnswerType.textInput,
-      ),
+      // ChatMessage(
+      //   id: _uuid.v4(),
+      //   text: "더 궁금한 사항이 있으세요?\n자유롭게 질문해주세요!",
+      //   sender: MessageSender.ai,
+      //   answerType: AnswerType.textInput,
+      // ),
       ChatMessage(
         id: _uuid.v4(),
         text: "답변이 마음에 들지 않다면, 다시 처음부터 질문을 시작해주세요.",
@@ -33,7 +33,7 @@ class SymptomResultNotifier extends StateNotifier<SymptomResultState> {
         answerType: AnswerType.button,
         buttonPayload: {
           // 버튼에 필요한 정보
-          'text': '처음부터 다시 시작', // 버튼에 표시될 텍스트
+          'text': '처음부터', // 버튼에 표시될 텍스트
           'action': 'restart_symptom_check', // 버튼 클릭 시 수행할 액션 식별자
         },
       ),

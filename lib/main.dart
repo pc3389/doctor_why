@@ -2,6 +2,7 @@ import 'package:dbheatlcareproject/features/navigation/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/theme/app_colors.dart';
@@ -12,6 +13,7 @@ Future<void> main() async {
   // EasyLocalization 초기화 보장
   await EasyLocalization.ensureInitialized();
 
+  await dotenv.load(fileName: "key.env");
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: SystemUiOverlay.values,

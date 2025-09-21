@@ -8,22 +8,22 @@ Widget singleButton({
   required VoidCallback? onPressed,
   required String text,
   Color backgroundColor = AppColors.indigo500,
+  Color textColor = AppColors.white,
+  Color borderColor = AppColors.indigo500,
   double width = double.infinity,
+  double horizontalPadding = 16.0,
+  double verticalPadding = 12.0,
 }) {
-  Color textColor =
-      (backgroundColor == AppColors.indigo500)
-          ? AppColors.white
-          : AppColors.slate500;
-  Color borderColor =
-      (backgroundColor == AppColors.indigo500)
-          ? AppColors.indigo500
-          : AppColors.indigo100;
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
       backgroundColor: backgroundColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       side: BorderSide(color: borderColor, width: 1.0),
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: verticalPadding,
+      ),
+      elevation: 0.0
     ),
     onPressed: onPressed,
     child: SizedBox(

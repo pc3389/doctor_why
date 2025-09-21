@@ -1,5 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:dbheatlcareproject/core/theme/app_colors.dart';
+import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
+import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 Widget buildTextComposer({
   required context,
@@ -9,17 +12,8 @@ Widget buildTextComposer({
   required void Function(String) handleUserMessageSubmitted,
 }) {
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-    decoration: BoxDecoration(
-      color: Theme.of(context).cardColor,
-      boxShadow: [
-        BoxShadow(
-          offset: const Offset(0, -1),
-          blurRadius: 1.0,
-          color: Colors.grey.withOpacity(0.2),
-        ),
-      ],
-    ),
+    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+    decoration: BoxDecoration(color: AppColors.white),
     child: Row(
       children: <Widget>[
         Expanded(
@@ -28,18 +22,50 @@ Widget buildTextComposer({
             focusNode: textFieldFocusNode,
             enabled: enabled,
             onSubmitted: enabled ? handleUserMessageSubmitted : null,
+            style: AppTextStyles.regular16(
+              context,
+            ).copyWith(color: AppColors.slate950),
             decoration: InputDecoration(
-              hintText: enabled ? "메시지를 입력하세요..." : "옵션을 선택해주세요",
+              hintText: enabled ? "메시지를 입력하세요..." : "지금은 답변을 입력 할 수 없어요",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),
-                borderSide: BorderSide.none,
+                borderSide: BorderSide(
+                  color: AppColors.slate200,
+                  width: 1.0,
+                ), // 또는 Colors.transparent
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: BorderSide(
+                  color: AppColors.indigo400,
+                  width: 1.0,
+                ), // 또는 Colors.transparent
+              ),
+              enabledBorder: OutlineInputBorder(
+                // enabledBorder도 명시적으로 설정
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: BorderSide(
+                  color: AppColors.slate200,
+                  width: 1.0,
+                ), // 또는 Colors.transparent
+              ),
+              disabledBorder: OutlineInputBorder(
+                // enabledBorder도 명시적으로 설정
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: BorderSide(
+                  color: AppColors.slate200,
+                  width: 1.0,
+                ), // 또는 Colors.transparent
               ),
               filled: true,
-              fillColor: enabled ? Colors.grey[100] : Colors.grey[200],
+              fillColor: AppColors.slate100,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
                 vertical: 10.0,
               ),
+              hintStyle: AppTextStyles.regular16(
+                context,
+              ).copyWith(color: AppColors.slate400),
             ),
             textInputAction: TextInputAction.send,
             minLines: 1,
@@ -47,22 +73,18 @@ Widget buildTextComposer({
           ),
         ),
         const SizedBox(width: 8.0),
-        IconButton(
-          icon: Icon(
-            Icons.send,
-            color:
-                enabled
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey, // 활성화 시 아이콘 색상
-          ),
-          onPressed:
-              enabled
-                  ? () {
-                    final textToSend = textController.text;
-                    handleUserMessageSubmitted(textToSend);
-                  }
-                  : null,
-        ),
+        enabled
+            ? IconButton(
+              icon: SvgPicture.asset(AppSvgs.sendEnabledIcon),
+              onPressed: () {
+                final textToSend = textController.text;
+                handleUserMessageSubmitted(textToSend);
+              },
+            )
+            : IconButton(
+              icon: SvgPicture.asset(AppSvgs.sendDisabledIcon),
+              onPressed: null,
+            ),
       ],
     ),
   );

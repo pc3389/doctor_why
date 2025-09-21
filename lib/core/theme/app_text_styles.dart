@@ -9,19 +9,20 @@ class AppTextStyles {
   AppTextStyles._(); // Private constructor to prevent instantiation
 
   // 기본 폰트 패밀리 (필요시 pubspec.yaml에 폰트 추가 후 설정)
-  static const String _fontFamily = 'Pretendard'; // 예: 'Pretendard', 'NotoSansKR' 등
+  static const String _fontFamily =
+      'Pretendard'; // 예: 'Pretendard', 'NotoSansKR' 등
 
   static const double _extraSmallFontSize = 12.0;
   static const double _smallFontSize = 14.0;
   static const double _mediumFontSize = 16.0;
   static const double _largeFontSize = 18.0;
 
-
+  static const fontVariationBold = [FontVariation('wght', 600)];
 
   static const TextStyle bold12Kr = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _extraSmallFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     letterSpacing: _extraSmallFontSize * -0.02,
     height: 1.4,
@@ -30,16 +31,16 @@ class AppTextStyles {
   static const TextStyle bold14Kr = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _smallFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     letterSpacing: _smallFontSize * -0.02,
-      height: 1.4,
+    height: 1.4,
   );
 
   static const TextStyle bold16Kr = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _mediumFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     letterSpacing: _mediumFontSize * -0.02,
     height: 1.4,
@@ -48,7 +49,7 @@ class AppTextStyles {
   static const TextStyle bold20Kr = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _largeFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     letterSpacing: _largeFontSize * -0.02,
     height: 1.4,
@@ -89,7 +90,7 @@ class AppTextStyles {
   static const TextStyle bold12En = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _extraSmallFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     height: 1.4,
   );
@@ -97,7 +98,7 @@ class AppTextStyles {
   static const TextStyle bold14En = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _smallFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     // letterSpacing: -0.5,
     height: 1.4,
@@ -106,7 +107,7 @@ class AppTextStyles {
   static const TextStyle bold16En = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _mediumFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     height: 1.4,
   );
@@ -114,7 +115,7 @@ class AppTextStyles {
   static const TextStyle bold20En = TextStyle(
     fontFamily: _fontFamily,
     fontSize: _largeFontSize,
-    fontWeight: FontWeight.bold,
+    fontVariations: fontVariationBold,
     color: AppColors.slate950,
     height: 1.4,
   );

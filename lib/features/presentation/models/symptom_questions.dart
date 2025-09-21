@@ -20,6 +20,7 @@ final List<QuestionData> symptomAnalysisQuestions = [
       QuestionOption(text: "네", svg: AppSvgs.yesIcon),
       QuestionOption(text: "아니오", svg: AppSvgs.noIcon),
     ],
+    additionalQuestion: "기저 질환명을 입력해주세요.",
   ),
   QuestionData(
     id: 2,

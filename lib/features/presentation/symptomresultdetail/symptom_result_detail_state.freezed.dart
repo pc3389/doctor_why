@@ -21,6 +21,7 @@ mixin _$SymptomResultDetailState {
   List<String> get whatToDoList => throw _privateConstructorUsedError;
   List<Medicine> get medicineList => throw _privateConstructorUsedError;
   List<Medicine> get foodList => throw _privateConstructorUsedError;
+  List<String> get medicalDepartmentList => throw _privateConstructorUsedError;
   String get analysedText => throw _privateConstructorUsedError;
   String? get recommendedNextStep => throw _privateConstructorUsedError;
   String? get precautions => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $SymptomResultDetailStateCopyWith<$Res> {
       List<String> whatToDoList,
       List<Medicine> medicineList,
       List<Medicine> foodList,
+      List<String> medicalDepartmentList,
       String analysedText,
       String? recommendedNextStep,
       String? precautions,
@@ -72,6 +74,7 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
     Object? whatToDoList = null,
     Object? medicineList = null,
     Object? foodList = null,
+    Object? medicalDepartmentList = null,
     Object? analysedText = null,
     Object? recommendedNextStep = freezed,
     Object? precautions = freezed,
@@ -95,6 +98,10 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
           ? _value.foodList
           : foodList // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
+      medicalDepartmentList: null == medicalDepartmentList
+          ? _value.medicalDepartmentList
+          : medicalDepartmentList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       analysedText: null == analysedText
           ? _value.analysedText
           : analysedText // ignore: cast_nullable_to_non_nullable
@@ -133,6 +140,7 @@ abstract class _$$SymptomResultDetailStateImplCopyWith<$Res>
       List<String> whatToDoList,
       List<Medicine> medicineList,
       List<Medicine> foodList,
+      List<String> medicalDepartmentList,
       String analysedText,
       String? recommendedNextStep,
       String? precautions,
@@ -159,6 +167,7 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
     Object? whatToDoList = null,
     Object? medicineList = null,
     Object? foodList = null,
+    Object? medicalDepartmentList = null,
     Object? analysedText = null,
     Object? recommendedNextStep = freezed,
     Object? precautions = freezed,
@@ -182,6 +191,10 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
           ? _value._foodList
           : foodList // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
+      medicalDepartmentList: null == medicalDepartmentList
+          ? _value._medicalDepartmentList
+          : medicalDepartmentList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       analysedText: null == analysedText
           ? _value.analysedText
           : analysedText // ignore: cast_nullable_to_non_nullable
@@ -211,6 +224,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       final List<String> whatToDoList = const [],
       final List<Medicine> medicineList = const [],
       final List<Medicine> foodList = const [],
+      final List<String> medicalDepartmentList = const [],
       this.analysedText = '',
       this.recommendedNextStep,
       this.precautions,
@@ -219,7 +233,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       : _diseasePredictionList = diseasePredictionList,
         _whatToDoList = whatToDoList,
         _medicineList = medicineList,
-        _foodList = foodList;
+        _foodList = foodList,
+        _medicalDepartmentList = medicalDepartmentList;
 
   final List<DiseasePrediction> _diseasePredictionList;
   @override
@@ -258,6 +273,16 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
     return EqualUnmodifiableListView(_foodList);
   }
 
+  final List<String> _medicalDepartmentList;
+  @override
+  @JsonKey()
+  List<String> get medicalDepartmentList {
+    if (_medicalDepartmentList is EqualUnmodifiableListView)
+      return _medicalDepartmentList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_medicalDepartmentList);
+  }
+
   @override
   @JsonKey()
   final String analysedText;
@@ -273,7 +298,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
 
   @override
   String toString() {
-    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, analysedText: $analysedText, recommendedNextStep: $recommendedNextStep, precautions: $precautions, serverity: $serverity, isLoading: $isLoading)';
+    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, medicalDepartmentList: $medicalDepartmentList, analysedText: $analysedText, recommendedNextStep: $recommendedNextStep, precautions: $precautions, serverity: $serverity, isLoading: $isLoading)';
   }
 
   @override
@@ -288,6 +313,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
             const DeepCollectionEquality()
                 .equals(other._medicineList, _medicineList) &&
             const DeepCollectionEquality().equals(other._foodList, _foodList) &&
+            const DeepCollectionEquality()
+                .equals(other._medicalDepartmentList, _medicalDepartmentList) &&
             (identical(other.analysedText, analysedText) ||
                 other.analysedText == analysedText) &&
             (identical(other.recommendedNextStep, recommendedNextStep) ||
@@ -306,6 +333,7 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       const DeepCollectionEquality().hash(_whatToDoList),
       const DeepCollectionEquality().hash(_medicineList),
       const DeepCollectionEquality().hash(_foodList),
+      const DeepCollectionEquality().hash(_medicalDepartmentList),
       analysedText,
       recommendedNextStep,
       precautions,
@@ -328,6 +356,7 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
       final List<String> whatToDoList,
       final List<Medicine> medicineList,
       final List<Medicine> foodList,
+      final List<String> medicalDepartmentList,
       final String analysedText,
       final String? recommendedNextStep,
       final String? precautions,
@@ -342,6 +371,8 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
   List<Medicine> get medicineList;
   @override
   List<Medicine> get foodList;
+  @override
+  List<String> get medicalDepartmentList;
   @override
   String get analysedText;
   @override

@@ -13,6 +13,7 @@ class SymptomResultDetailState with _$SymptomResultDetailState {
     @Default([]) List<String> whatToDoList,
     @Default([]) List<Medicine> medicineList,
     @Default([]) List<Medicine> foodList,
+    @Default([]) List<String> medicalDepartmentList,
     @Default('') String analysedText,
     String? recommendedNextStep,
     String? precautions,

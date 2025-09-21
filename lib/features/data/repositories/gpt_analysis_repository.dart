@@ -1,5 +1,4 @@
-// gpt_analysis_repository.dart
-
+import 'package:dbheatlcareproject/features/data/models/user_input_request_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,7 +9,7 @@ part 'gpt_analysis_repository.g.dart';
 
 // Repository 추상 클래스
 abstract class GptAnalysisRepository {
-  Future<GptAnalysisResponse> fetchGptAnalysis();
+  Future<GptAnalysisResponse> fetchGptAnalysis(UserInputRequestModel userInput);
 }
 
 // 실제 Repository 구현체
@@ -21,15 +20,15 @@ class GptAnalysisRepositoryImpl implements GptAnalysisRepository {
   GptAnalysisRepositoryImpl(this._dataSource);
 
   @override
-  Future<GptAnalysisResponse> fetchGptAnalysis() async {
+  Future<GptAnalysisResponse> fetchGptAnalysis(UserInputRequestModel userInput) async {
     // DataSource로부터 mock 분석 데이터 가져오기
-    return await _dataSource.getMockAnalysis();
+    return await _dataSource.getAnalysis(userInput);
   }
 }
 
 @riverpod
 GptAnalysisRepository gptAnalysisRepository(Ref ref) {
   // gptAnalysisDataSourceProvider를 watch하여 DataSource 인스턴스를 가져옴
-  final dataSource = ref.watch(gptAnalysisDataSourceProvider);
+  final dataSource = ref.watch(gptMockAnalysisDataSourceProvider);
   return GptAnalysisRepositoryImpl(dataSource);
 }

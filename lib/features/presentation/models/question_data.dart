@@ -52,6 +52,7 @@ class QuestionData {
   final List<String>? arrayOptions; // AnswerType.array 일 때 사용
   final String? nextQuestionPrompt; // 옵션 선택 후 AI가 추가로 할 말 (선택 사항)
   final bool disableTextInputAfterOption; // 옵션 선택 후 텍스트 입력창 비활성화 여부
+  final String? additionalQuestion;
 
   QuestionData({
     this.preQuestionPrompt,
@@ -63,6 +64,7 @@ class QuestionData {
     this.arrayOptions,
     this.nextQuestionPrompt,
     this.disableTextInputAfterOption = true, // 기본값은 옵션 선택 후 입력창 비활성화
+    this.additionalQuestion,
   }) : assert(
          answerType == AnswerType.selectableOptions
              ? options != null && options.isNotEmpty

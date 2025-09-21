@@ -2,6 +2,7 @@ import 'package:dbheatlcareproject/core/theme/app_colors.dart';
 import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
 import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomInput/symptom_input_notifier.dart';
+import 'package:dbheatlcareproject/features/presentation/symptom_input_result_notifier.dart';
 import 'package:dbheatlcareproject/features/presentation/widgets/image_with_text_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,7 +113,19 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
       ),
       (previous, next) {
         // allQuestionsCompleted가 true로 변경되었고, 이전 값은 false였을 때
+        final userAnswers = ref.watch(symptomInputNotifierProvider).userAnswers;
         if (next == true && (previous == false || previous == null)) {
+          ref
+              .read(symptomInputResultNotifierProvider.notifier)
+              .updateState(
+                gender: userAnswers[0] == '0' ? '남자' : '여자',
+                preExisting:
+                    userAnswers[1] == '1' ? '없음' : userAnswers[1] ?? '',
+                injuredPart: userAnswers[2] ?? '',
+                symptom: userAnswers[3] ?? '',
+                painLevel: userAnswers[4] ?? '',
+                period: userAnswers[5] ?? '',
+              );
           context.replace(SymptomResultScreen.routePath);
         }
       },
@@ -138,10 +151,11 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: SvgPicture.asset(AppSvgs.appLogoCircleIcon),
             ),
+            SizedBox(height: 8.0),
             Expanded(
               child: ListView.builder(
                 controller: _scrollController,
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 itemCount: symptomState.messages.length,
                 itemBuilder: (BuildContext context, int index) {
                   final message = symptomState.messages[index];
@@ -170,10 +184,14 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
                     }
                     widgets.remove(widgets.last); // 마지막 위젯 제거 (공백)
                     Widget row = Row(children: widgets);
-                    return ChatMessageBubble(message: message, widgets: [row]);
+                    return ChatMessageBubble(
+                      message: message,
+                      widgets: [SizedBox(height: 16.0), row],
+                    );
                   } else if (message.answerType == AnswerType.array) {
                     List<Widget> widgets = [];
                     int length = symptomState.currentArray.length;
+                    widgets.add(SizedBox(height: 16));
                     for (int i = 0; i < length; i += 2) {
                       List<Widget> rowItems = [];
                       // TODO Replace Text to clickable

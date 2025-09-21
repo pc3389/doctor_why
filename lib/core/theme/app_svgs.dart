@@ -40,4 +40,6 @@ class AppSvgs {
   static const String symptomResultDetailImage =
       '$_basePath/symptom_result_input_image.png';
   static const String resultSearchIcon = '$_basePath/ic_search_result.svg';
+  static const String resultDetailLogoImage = '$_basePath/result_detail_logo_img.svg';
+
 }

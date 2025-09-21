@@ -2,10 +2,7 @@ class DiseaseInfo {
   final String name;
   final int probability; // 또는 double, API 응답에 따라
 
-  DiseaseInfo({
-    required this.name,
-    required this.probability,
-  });
+  DiseaseInfo({required this.name, required this.probability});
 
   factory DiseaseInfo.fromJson(Map<String, dynamic> json) {
     return DiseaseInfo(
@@ -15,10 +12,7 @@ class DiseaseInfo {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      '이름': name,
-      '확률': probability,
-    };
+    return {'이름': name, '확률': probability};
   }
 }
 
@@ -27,10 +21,7 @@ class ItemWithReason {
   final String name;
   final String reason;
 
-  ItemWithReason({
-    required this.name,
-    required this.reason,
-  });
+  ItemWithReason({required this.name, required this.reason});
 
   factory ItemWithReason.fromJson(Map<String, dynamic> json) {
     return ItemWithReason(
@@ -40,9 +31,6 @@ class ItemWithReason {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      '이름': name,
-      '이유': reason,
-    };
+    return {'이름': name, '이유': reason};
   }
 }

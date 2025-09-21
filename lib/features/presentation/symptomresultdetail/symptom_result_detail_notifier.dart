@@ -1,3 +1,4 @@
+import 'package:dbheatlcareproject/features/data/models/user_input_request_model.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/serverity.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,13 +16,18 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
     return SymptomResultDetailState();
   }
 
-  Future<void> updateStateWithGptResponse() async {
+  Future<void> updateStateWithGptResponse(UserInputRequestModel request) async {
+    state = state.copyWith(isLoading: true);
     // Repository 인스턴스를 가져옵니다.
     final repository = ref.read(gptAnalysisRepositoryProvider);
 
+    print('OpenAIaa gpt call notifier');
+
     try {
       // Repository를 통해 GPT 분석 데이터를 가져옵니다.
-      final gptResponse = await repository.fetchGptAnalysis();
+      final gptResponse = await repository.fetchGptAnalysis(request);
+
+      print('OpenAIaa gptResponse = ${gptResponse.toString()}');
 
       // 가져온 데이터로 상태를 업데이트합니다.
       final newDiseasePredictions =
@@ -34,6 +40,9 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
               )
               .toList();
       final newWhatToDoList = List<String>.from(gptResponse.lifestyleTips);
+      final newMedicalDepartmentList = List<String>.from(
+        gptResponse.relatedDepartments,
+      );
       final newMedicineList =
           gptResponse.recommendedMedications
               .map(
@@ -52,12 +61,15 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
         diseasePredictionList: newDiseasePredictions,
         whatToDoList: newWhatToDoList,
         medicineList: newMedicineList,
+        medicalDepartmentList: newMedicalDepartmentList,
         foodList: newFoodList,
         serverity: severity,
         recommendedNextStep: gptResponse.recommendedNextStep,
         precautions: gptResponse.precautions,
+        isLoading: false,
       );
     } catch (e, stackTrace) {
+      state = state.copyWith(isLoading: false);
       print('Error fetching or updating with GPT response: $e');
       print(stackTrace);
     }
@@ -110,6 +122,29 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
   // 리스트를 비우는 메소드 예시
   void clearWhatToDo() {
     state = state.copyWith(whatToDoList: []);
+  }
+
+  // 기존 리스트에 아이템을 추가하는 메소드 예시
+  void addMedicalDepartment(String newMedicalDepartment) {
+    // 현재 리스트를 복사한 후 새 아이템 추가
+    final updatedList = List<String>.from(state.whatToDoList)
+      ..add(newMedicalDepartment);
+
+    // 또는 spread operator 사용 (더 권장)
+    // final updatedList = [...state.diseasePredictionList, newPrediction];
+
+    state = state.copyWith(medicalDepartmentList: updatedList);
+  }
+
+  // 특정 조건에 맞는 아이템을 삭제하는 메소드 예시
+  void removeMedicalDepartment(String text) {
+    final updatedList = state.whatToDoList.where((it) => it != text).toList();
+    state = state.copyWith(medicalDepartmentList: updatedList);
+  }
+
+  // 리스트를 비우는 메소드 예시
+  void clearMedicalDepartment() {
+    state = state.copyWith(medicalDepartmentList: []);
   }
 
   // 기존 리스트에 아이템을 추가하는 메소드 예시

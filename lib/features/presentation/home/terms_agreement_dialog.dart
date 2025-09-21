@@ -23,6 +23,7 @@ class TermsAgreementDialog extends ConsumerWidget {
     // WidgetRef 추가
     return AlertDialog(
       backgroundColor: AppColors.white,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 16.0),
       title: Text(
         '원활한 서비스 이용을 위해 동의해주세요.',
         style: AppTextStyles.bold20(context),
@@ -93,6 +94,8 @@ class TermsAgreementDialog extends ConsumerWidget {
       actionsAlignment: MainAxisAlignment.center,
       actionsOverflowDirection: VerticalDirection.down,
       actions: <Widget>[
+        Divider(color: AppColors.slate200, height: 1.0),
+        const SizedBox(height: 16),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -105,7 +108,7 @@ class TermsAgreementDialog extends ConsumerWidget {
                 await ref.read(termsNotifierProvider.notifier).agreeToTerms();
                 onAgreedAndProceed(); // 다음 단계 진행 콜백 실행
               },
-              text: '동의합니다',
+              text: '네, 모두 동의합니다.',
             ),
             const SizedBox(height: 8),
             singleButton(
@@ -114,8 +117,10 @@ class TermsAgreementDialog extends ConsumerWidget {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
                 onDisagreed?.call();
               },
-              text: '아니오, 동의하지 않습니다',
+              text: '아니오, 동의하지 않습니다.',
               backgroundColor: AppColors.white,
+              textColor: AppColors.slate500,
+              borderColor: AppColors.indigo100,
             ),
           ],
         ),
