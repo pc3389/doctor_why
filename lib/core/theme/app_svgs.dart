@@ -26,8 +26,7 @@ class AppSvgs {
   static const String resultCrossIcon = '$_basePath/icon_result_cross.svg';
   static const String resultBulbIcon = '$_basePath/icon_result_bulb.svg';
   static const String resultDotsIcon = '$_basePath/ic_result_dots.svg';
-  static const String resultNextStepIcon =
-      '$_basePath/ic_result_next_step.svg';
+  static const String resultNextStepIcon = '$_basePath/ic_result_next_step.svg';
   static const String resultMedicineIcon =
       '$_basePath/icon_result_medicine.svg';
   static const String resultFoodIcon = '$_basePath/ic_result_food.svg';
@@ -40,6 +39,6 @@ class AppSvgs {
   static const String symptomResultDetailImage =
       '$_basePath/symptom_result_input_image.png';
   static const String resultSearchIcon = '$_basePath/ic_search_result.svg';
-  static const String resultDetailLogoImage = '$_basePath/result_detail_logo_img.svg';
-
+  static const String resultDetailLogoImage =
+      '$_basePath/result_detail_logo_img.svg';
 }

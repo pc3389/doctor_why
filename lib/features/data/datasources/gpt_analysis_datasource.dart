@@ -13,18 +13,20 @@ import 'mock_data.dart'; // mock 데이터 문자열
 part 'gpt_analysis_datasource.g.dart';
 
 abstract class GptAnalysisDataSource {
-  Future<GptAnalysisResponse> getAnalysis(UserInputRequestModel request);
+  Future<GptAnalysisResponse> getAnalysis(
+    UserInputRequestModel request,
+  );
 }
 
 class MockGptAnalysisDataSource implements GptAnalysisDataSource {
   @override
-  Future<GptAnalysisResponse> getAnalysis(UserInputRequestModel request) async {
+  Future<GptAnalysisResponse> getAnalysis(
+    UserInputRequestModel request,
+  ) async {
     // Simulate network delay
-    print("sdkjhfksjdhf: Datasource init");
 
     final Map<String, dynamic> jsonMap =
         json.decode(mockSingleGptResponseJson) as Map<String, dynamic>;
-    print("sdkjhfksjdhf: map $jsonMap");
     return GptAnalysisResponse.fromJson(jsonMap);
   }
 
@@ -57,10 +59,7 @@ class RemoteGptAnalysisDataSource implements GptAnalysisDataSource {
   ) async {
     final apiKey = dotenv.env['OPENAI_API_KEY'];
     if (apiKey == null || apiKey.isEmpty) {
-      print('Error: OpenAI API Key is not loaded or is empty.');
-      throw Exception(
-        'OpenAI API Key is not configured. Please check your key.env file and main.dart initialization.',
-      );
+      throw Exception('OpenAI API Key가 앱에 등록되지 않았습니다.');
     }
 
     // messages 파라미터를 List<Map<String, dynamic>> 형태로 구성
@@ -125,7 +124,7 @@ class RemoteGptAnalysisDataSource implements GptAnalysisDataSource {
       messages: messages, // 수정된 messages 리스트 전달
       maxToken: 2000, // 응답으로 받을 최대 토큰 수 (결과가 잘리지 않도록 충분히 설정)
       // 한글은 영어보다 토큰을 많이 차지할 수 있습니다.
-      model: Gpt4ChatModel(),
+      model: Gpt4oMiniChatModel(),
     );
 
     try {
@@ -137,8 +136,6 @@ class RemoteGptAnalysisDataSource implements GptAnalysisDataSource {
         final String? chatResponseString =
             response.choices[0].message?.content.trim();
         if (chatResponseString != null && chatResponseString.isNotEmpty) {
-          print('OpenAIaa: ChatGPT Raw JSON Response: $chatResponseString');
-
           // ChatGPT 응답이 유효한 JSON인지 확인하고 파싱
           try {
             // 응답 문자열 앞뒤에 있을 수 있는 마크다운 JSON 코드 블록 표시 제거
@@ -156,35 +153,23 @@ class RemoteGptAnalysisDataSource implements GptAnalysisDataSource {
 
             final Map<String, dynamic> jsonResponse =
                 json.decode(cleanedJsonString) as Map<String, dynamic>;
-            print('OpenAIaa: JSON response: $jsonResponse');
             return GptAnalysisResponse.fromJson(jsonResponse);
           } catch (e) {
-            print('OpenAIaa: Error parsing ChatGPT JSON response: $e');
-            print('OpenAIaa: Problematic JSON string: $chatResponseString');
-            throw Exception(
-              'OpenAIaa: Failed to parse the analysis response from ChatGPT. The format might be incorrect.',
-            );
+            throw Exception('Chat GPT의 응답이 JSON 형태가 아닙니다.');
           }
         } else {
-          print('OpenAIaa: Error: ChatGPT response content is null or empty.');
-          throw Exception(
-            'OpenAIaa: Received empty response content from ChatGPT.',
-          );
+          throw Exception('ChatGPT에서 빈 응답을 받았습니다.');
         }
       } else {
-        String errorMessage =
-            'OpenAIaa: Failed to get a valid response from ChatGPT (null or no choices).';
+        String errorMessage = 'chatGPT에서 올바른 응답을 받지 못하였습니다.';
         throw Exception(errorMessage);
       }
     } on OpenAIAuthError catch (e) {
-      print('OpenAIaa: OpenAI Authentication Error: ${e}');
-      throw Exception('OpenAIaa: OpenAI Authentication Failed: ${e}');
+      throw Exception('OpenAI 인증 실패: ${e}');
     } on OpenAIRateLimitError catch (e) {
-      print('OpenAIaa: OpenAI Rate Limit Error: ${e}');
-      throw Exception('OpenAIaa: OpenAI Rate Limit Exceeded: ${e}');
+      throw Exception('개발자가 돈을 지불해야 합니다. 개발자에게 꼭 연락 바랍니다.: ${e}');
     } on OpenAIServerError catch (e) {
-      print('OpenAIaa: OpenAI Server Error: ${e}');
-      throw Exception('OpenAIaa: OpenAI Server Error: ${e}');
+      throw Exception('OpenAI 서버 에러: ${e}');
     }
   }
 }

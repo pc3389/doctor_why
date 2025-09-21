@@ -18,6 +18,7 @@ class SymptomResultDetailState with _$SymptomResultDetailState {
     String? recommendedNextStep,
     String? precautions,
     Severity? serverity,
-    @Default(false) isLoading,
+    @Default(false) bool isLoading,
+    @Default('') String errorMessage,
   }) = _SymptomResultDetailState;
 }

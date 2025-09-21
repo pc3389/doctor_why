@@ -17,17 +17,13 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
   }
 
   Future<void> updateStateWithGptResponse(UserInputRequestModel request) async {
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true, errorMessage: '');
     // Repository 인스턴스를 가져옵니다.
     final repository = ref.read(gptAnalysisRepositoryProvider);
-
-    print('OpenAIaa gpt call notifier');
 
     try {
       // Repository를 통해 GPT 분석 데이터를 가져옵니다.
       final gptResponse = await repository.fetchGptAnalysis(request);
-
-      print('OpenAIaa gptResponse = ${gptResponse.toString()}');
 
       // 가져온 데이터로 상태를 업데이트합니다.
       final newDiseasePredictions =
@@ -68,10 +64,8 @@ class SymptomResultDetailNotifier extends _$SymptomResultDetailNotifier {
         precautions: gptResponse.precautions,
         isLoading: false,
       );
-    } catch (e, stackTrace) {
-      state = state.copyWith(isLoading: false);
-      print('Error fetching or updating with GPT response: $e');
-      print(stackTrace);
+    } catch (e) {
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
   }
 

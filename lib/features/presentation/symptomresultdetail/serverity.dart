@@ -40,7 +40,6 @@ extension SeverityExtension on Severity {
       case 'severe':
         return Severity.severe;
       default:
-        print('Unknown severity string from API: $severityString');
         return Severity.unknown;
     }
   }

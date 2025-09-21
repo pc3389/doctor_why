@@ -71,7 +71,6 @@ class SymptomResultNotifier extends StateNotifier<SymptomResultState> {
 
   // "처음부터 다시 시작" 버튼 클릭 처리 (예시)
   void handleRestartSymptomCheck() {
-    print("Restarting symptom check...");
     // TODO: 실제 증상 확인 초기화 로직 호출
     // 예: 다른 Notifier의 reset 메소드를 호출하거나, 특정 라우트로 이동
     // 이 Notifier의 상태를 초기화할 수도 있습니다.

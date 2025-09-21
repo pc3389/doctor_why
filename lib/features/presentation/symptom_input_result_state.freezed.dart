@@ -33,6 +33,8 @@ abstract class $SymptomInputResultStateCopyWith<$Res> {
       _$SymptomInputResultStateCopyWithImpl<$Res, SymptomInputResultState>;
   @useResult
   $Res call({UserInputRequestModel? userInputRequest});
+
+  $UserInputRequestModelCopyWith<$Res>? get userInputRequest;
 }
 
 /// @nodoc
@@ -60,6 +62,21 @@ class _$SymptomInputResultStateCopyWithImpl<$Res,
               as UserInputRequestModel?,
     ) as $Val);
   }
+
+  /// Create a copy of SymptomInputResultState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserInputRequestModelCopyWith<$Res>? get userInputRequest {
+    if (_value.userInputRequest == null) {
+      return null;
+    }
+
+    return $UserInputRequestModelCopyWith<$Res>(_value.userInputRequest!,
+        (value) {
+      return _then(_value.copyWith(userInputRequest: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -72,6 +89,9 @@ abstract class _$$SymptomInputResultStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({UserInputRequestModel? userInputRequest});
+
+  @override
+  $UserInputRequestModelCopyWith<$Res>? get userInputRequest;
 }
 
 /// @nodoc

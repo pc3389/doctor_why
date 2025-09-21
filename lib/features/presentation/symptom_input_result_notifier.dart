@@ -27,11 +27,6 @@ class SymptomInputResultNotifier extends _$SymptomInputResultNotifier {
       painLevel: painLevel,
       period: period,
     );
-    print(
-      'OpenAIaa Request updated gender: ${request.gender}, '
-      'preExisting: ${request.preExisting}, injuredPart: ${request.injuredPart}, '
-      'symptom: ${request.symptom}, painLevel: ${request.painLevel}, ',
-    );
 
     state = state.copyWith(userInputRequest: request);
   }

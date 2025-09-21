@@ -107,10 +107,6 @@ class HomeScreen extends ConsumerWidget {
       builder: (BuildContext dialogContext) {
         // 여기서 context 이름을 dialogContext로 변경하여 외부 context와 구분
         return AlertDialog(
-          // title: Text( // 제목이 필요하다면 추가
-          //   '도움말',
-          //   style: AppTextStyles.titleBold16(context), // 예시 스타일
-          // ),
           content: SingleChildScrollView(
             // 내용이 길어질 경우 스크롤 가능하도록
             child: ListBody(

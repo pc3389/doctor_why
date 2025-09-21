@@ -26,7 +26,8 @@ mixin _$SymptomResultDetailState {
   String? get recommendedNextStep => throw _privateConstructorUsedError;
   String? get precautions => throw _privateConstructorUsedError;
   Severity? get serverity => throw _privateConstructorUsedError;
-  dynamic get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  String get errorMessage => throw _privateConstructorUsedError;
 
   /// Create a copy of SymptomResultDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -51,7 +52,8 @@ abstract class $SymptomResultDetailStateCopyWith<$Res> {
       String? recommendedNextStep,
       String? precautions,
       Severity? serverity,
-      dynamic isLoading});
+      bool isLoading,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -79,7 +81,8 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
     Object? recommendedNextStep = freezed,
     Object? precautions = freezed,
     Object? serverity = freezed,
-    Object? isLoading = freezed,
+    Object? isLoading = null,
+    Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
       diseasePredictionList: null == diseasePredictionList
@@ -118,10 +121,14 @@ class _$SymptomResultDetailStateCopyWithImpl<$Res,
           ? _value.serverity
           : serverity // ignore: cast_nullable_to_non_nullable
               as Severity?,
-      isLoading: freezed == isLoading
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -145,7 +152,8 @@ abstract class _$$SymptomResultDetailStateImplCopyWith<$Res>
       String? recommendedNextStep,
       String? precautions,
       Severity? serverity,
-      dynamic isLoading});
+      bool isLoading,
+      String errorMessage});
 }
 
 /// @nodoc
@@ -172,7 +180,8 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
     Object? recommendedNextStep = freezed,
     Object? precautions = freezed,
     Object? serverity = freezed,
-    Object? isLoading = freezed,
+    Object? isLoading = null,
+    Object? errorMessage = null,
   }) {
     return _then(_$SymptomResultDetailStateImpl(
       diseasePredictionList: null == diseasePredictionList
@@ -211,7 +220,14 @@ class __$$SymptomResultDetailStateImplCopyWithImpl<$Res>
           ? _value.serverity
           : serverity // ignore: cast_nullable_to_non_nullable
               as Severity?,
-      isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -229,7 +245,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       this.recommendedNextStep,
       this.precautions,
       this.serverity,
-      this.isLoading = false})
+      this.isLoading = false,
+      this.errorMessage = ''})
       : _diseasePredictionList = diseasePredictionList,
         _whatToDoList = whatToDoList,
         _medicineList = medicineList,
@@ -294,11 +311,14 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
   final Severity? serverity;
   @override
   @JsonKey()
-  final dynamic isLoading;
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final String errorMessage;
 
   @override
   String toString() {
-    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, medicalDepartmentList: $medicalDepartmentList, analysedText: $analysedText, recommendedNextStep: $recommendedNextStep, precautions: $precautions, serverity: $serverity, isLoading: $isLoading)';
+    return 'SymptomResultDetailState(diseasePredictionList: $diseasePredictionList, whatToDoList: $whatToDoList, medicineList: $medicineList, foodList: $foodList, medicalDepartmentList: $medicalDepartmentList, analysedText: $analysedText, recommendedNextStep: $recommendedNextStep, precautions: $precautions, serverity: $serverity, isLoading: $isLoading, errorMessage: $errorMessage)';
   }
 
   @override
@@ -323,7 +343,10 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
                 other.precautions == precautions) &&
             (identical(other.serverity, serverity) ||
                 other.serverity == serverity) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
@@ -338,7 +361,8 @@ class _$SymptomResultDetailStateImpl implements _SymptomResultDetailState {
       recommendedNextStep,
       precautions,
       serverity,
-      const DeepCollectionEquality().hash(isLoading));
+      isLoading,
+      errorMessage);
 
   /// Create a copy of SymptomResultDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -361,7 +385,8 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
       final String? recommendedNextStep,
       final String? precautions,
       final Severity? serverity,
-      final dynamic isLoading}) = _$SymptomResultDetailStateImpl;
+      final bool isLoading,
+      final String errorMessage}) = _$SymptomResultDetailStateImpl;
 
   @override
   List<DiseasePrediction> get diseasePredictionList;
@@ -382,7 +407,9 @@ abstract class _SymptomResultDetailState implements SymptomResultDetailState {
   @override
   Severity? get serverity;
   @override
-  dynamic get isLoading;
+  bool get isLoading;
+  @override
+  String get errorMessage;
 
   /// Create a copy of SymptomResultDetailState
   /// with the given fields replaced by the non-null parameter values.

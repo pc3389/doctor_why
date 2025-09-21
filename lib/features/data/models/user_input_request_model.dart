@@ -1,17 +1,15 @@
-class UserInputRequestModel {
-  final String gender;
-  final String preExisting;
-  final String injuredPart;
-  final String symptom;
-  final String painLevel;
-  final String period;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  UserInputRequestModel({
-    required this.gender,
-    required this.preExisting,
-    required this.injuredPart,
-    required this.symptom,
-    required this.painLevel,
-    required this.period,
-  });
+part 'user_input_request_model.freezed.dart';
+
+@freezed
+class UserInputRequestModel with _$UserInputRequestModel {
+  const factory UserInputRequestModel({
+    required String gender,
+    required String preExisting,
+    required String injuredPart,
+    required String symptom,
+    required String painLevel,
+    required String period,
+  }) = _UserInputRequestModel;
 }

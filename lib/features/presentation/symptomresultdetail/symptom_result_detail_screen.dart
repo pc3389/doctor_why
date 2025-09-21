@@ -36,7 +36,6 @@ class _SymptomResultDetailScreenState
   @override
   void initState() {
     super.initState();
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notifier = ref.read(symptomResultDetailNotifierProvider.notifier);
       notifier.updateStateWithGptResponse(
@@ -60,6 +59,68 @@ class _SymptomResultDetailScreenState
     SymptomResultDetailState state = ref.watch(
       symptomResultDetailNotifierProvider,
     );
+
+    ref.listen<SymptomResultDetailState>(symptomResultDetailNotifierProvider, (
+      SymptomResultDetailState? previousState,
+      SymptomResultDetailState newState,
+    ) {
+      if (newState.errorMessage.isNotEmpty &&
+          (previousState?.errorMessage == null ||
+              previousState!.errorMessage.isEmpty)) {
+        if (mounted) {
+          showDialog(
+            context: context,
+            // barrierDismissible: true, // 기본값이 true이므로 생략 가능
+            builder: (BuildContext dialogContext) {
+              // 여기서 context 이름을 dialogContext로 변경하여 외부 context와 구분
+              return AlertDialog(
+                content: SingleChildScrollView(
+                  // 내용이 길어질 경우 스크롤 가능하도록
+                  child: ListBody(
+                    // 여러 줄의 텍스트나 위젯을 세로로 배치
+                    children: <Widget>[
+                      Text(
+                        newState.errorMessage,
+                        style: AppTextStyles.bold20(context),
+                      ),
+                      SizedBox(height: 24),
+                      Text(
+                        'AI 결과를 받아오는 도중 에러가 발생 했습니다. 재시도 해주세요.',
+                        style: AppTextStyles.regular16(context),
+                      ),
+                      // 필요하다면 다른 위젯들도 추가 가능
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  singleButton(
+                    context: context,
+                    text: '재시도',
+                    onPressed: () {
+                      ref
+                          .read(symptomResultDetailNotifierProvider.notifier)
+                          .updateStateWithGptResponse(
+                            ref
+                                .read(symptomInputResultNotifierProvider)
+                                .userInputRequest!,
+                          );
+                      Navigator.of(dialogContext).pop();
+                    },
+                    horizontalPadding: 0.0,
+                    verticalPadding: 0.0,
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                backgroundColor: AppColors.white,
+                // elevation: 8.0, // 다이얼로그 그림자 (선택 사항)
+              );
+            },
+          );
+        }
+      }
+    });
 
     return Stack(
       children: [

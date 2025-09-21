@@ -101,7 +101,6 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   }
 
   void proceedToNextQuestion() {
-    print('asdkjfhsdkjf: proceedToNext ${state.currentQuestionIndex}');
     resetSymptomInputSession(state.currentQuestionIndex);
     loadQuestion();
   }
@@ -178,11 +177,6 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
 
     await Future.delayed(Duration(milliseconds: 500));
 
-    print('asdkjfhsdkjf: array selected, index $index');
-    print(
-      'asdkjfhsdkjf: answer ${state.userAnswers[state.currentQuestionIndex]}',
-    );
-
     state = state.copyWith(isQuestionLoading: false);
 
     _prepareForNextQuestion();
@@ -192,14 +186,12 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   void _recordAnswer(int questionIndex, String answer) {
     final updatedAnswers = Map<int, String>.from(state.userAnswers);
     updatedAnswers[questionIndex] = answer;
-    print('OpenAiaa: $questionIndex: ${updatedAnswers[questionIndex]}');
     state = state.copyWith(userAnswers: updatedAnswers);
   }
 
   void _prepareForNextQuestion() {
     final nextIndex = state.currentQuestionIndex + 1;
     if (nextIndex < symptomAnalysisQuestions.length) {
-      print('asdkjfhsdkjf: next question $nextIndex');
       state = state.copyWith(currentQuestionIndex: nextIndex);
     } else {
       _handleAllQuestionsCompleted();
@@ -207,7 +199,6 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
   }
 
   void _handleAllQuestionsCompleted() {
-    print('asdkjfhsdkjf: completed');
     state = state.copyWith(allQuestionsCompleted: true);
   }
 }

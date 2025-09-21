@@ -7,12 +7,11 @@ part of 'gpt_analysis_repository.dart';
 // **************************************************************************
 
 String _$gptAnalysisRepositoryHash() =>
-    r'3abd1ad34459ed88995c1076f99746cedd9f0be8';
+    r'eb24fc1e381dd376f0dc6b9c3f20125feaf1501e';
 
 /// See also [gptAnalysisRepository].
 @ProviderFor(gptAnalysisRepository)
-final gptAnalysisRepositoryProvider =
-    AutoDisposeProvider<GptAnalysisRepository>.internal(
+final gptAnalysisRepositoryProvider = Provider<GptAnalysisRepository>.internal(
   gptAnalysisRepository,
   name: r'gptAnalysisRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -24,7 +23,6 @@ final gptAnalysisRepositoryProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GptAnalysisRepositoryRef
-    = AutoDisposeProviderRef<GptAnalysisRepository>;
+typedef GptAnalysisRepositoryRef = ProviderRef<GptAnalysisRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
