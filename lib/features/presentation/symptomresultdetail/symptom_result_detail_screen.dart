@@ -216,7 +216,6 @@ class _SymptomResultDetailScreenState
                               ),
                               Spacer(flex: 1),
                               Text(
-                                // TODO 심각도 값 받아오기
                                 state.serverity?.displayName ?? '',
                                 style: AppTextStyles.regular16(
                                   context,
@@ -360,7 +359,7 @@ class _SymptomResultDetailScreenState
                             ],
                           ),
                           SizedBox(height: 16.0),
-                          _builMedicineList(state.medicineList),
+                          _buildMedicineList(state.medicineList),
                         ]),
                         SizedBox(height: spaceBetweenBoxes),
                         _container([
@@ -378,7 +377,7 @@ class _SymptomResultDetailScreenState
                             ],
                           ),
                           SizedBox(height: 16.0),
-                          _builMedicineList(state.foodList),
+                          _buildMedicineList(state.foodList),
                         ]),
                         SizedBox(height: spaceBetweenBoxes),
                         if (state.recommendedNextStep != null)
@@ -633,7 +632,7 @@ class _SymptomResultDetailScreenState
     );
   }
 
-  Widget _builMedicineList(List<Medicine> list) {
+  Widget _buildMedicineList(List<Medicine> list) {
     if (list.isEmpty) {
       return SizedBox();
     }
@@ -654,25 +653,6 @@ class _SymptomResultDetailScreenState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: listWidget,
-    );
-  }
-
-  LinearGradient _boxGradient() {
-    return LinearGradient(
-      // 방향: 위에서 아래로 (CSS의 180deg에 해당)
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      // 색상 목록
-      colors: const [
-        Color(0xFF0B005D), // #0B005D
-        Color(0xFF1400A9), // #1400A9
-        Color(0xFF00B2FF), // #00B2FF
-      ],
-      stops: const [
-        0.0, // 0%
-        0.4, // 40%
-        1.0, // 100%
-      ],
     );
   }
 
