@@ -1,6 +1,7 @@
 import 'package:dbheatlcareproject/core/theme/app_colors.dart';
 import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
 import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
+import 'package:dbheatlcareproject/core/utils/analytics_service.dart';
 import 'package:dbheatlcareproject/features/presentation/symptomInput/symptom_input_notifier.dart';
 import 'package:dbheatlcareproject/features/presentation/symptom_input_result_notifier.dart';
 import 'package:dbheatlcareproject/features/presentation/widgets/image_with_text_box.dart';
@@ -43,6 +44,7 @@ class _SymptomInputScreenState extends ConsumerState<SymptomInputScreen> {
   @override
   void initState() {
     super.initState();
+    AnalyticsService.logScreenView(screenName: 'system_input_screen');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         ref

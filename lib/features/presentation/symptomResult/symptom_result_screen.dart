@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/analytics_service.dart';
 import '../appbar/custom_app_bar.dart';
 import '../models/question_data.dart';
 import '../widgets/bottom_text_composer.dart';
@@ -30,6 +31,12 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
   final ScrollController _scrollController = ScrollController(); // 스크롤 컨트롤러 추가
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFieldFocusNode = FocusNode(); // TextField 포커스 관리
+
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsService.logScreenView(screenName: 'system_input_screen');
+  }
 
   @override
   void dispose() {
@@ -123,6 +130,9 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                               singleButton(
                                 context: context,
                                 onPressed: () {
+                                  AnalyticsService.logButtonClick(
+                                    buttonName: 'result_to_detail_button',
+                                  );
                                   context.push(
                                     SymptomResultDetailScreen.routePath,
                                   );
@@ -164,6 +174,9 @@ class _SymptomResultScreenState extends ConsumerState<SymptomResultScreen> {
                                 child: singleButton(
                                   context: context,
                                   onPressed: () {
+                                    AnalyticsService.logButtonClick(
+                                      buttonName: 'result_to_home_button',
+                                    );
                                     // 버튼 액션 처리
                                     if (message.buttonPayload is Map &&
                                         message.buttonPayload['action'] ==

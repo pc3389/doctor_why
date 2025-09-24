@@ -1,6 +1,7 @@
 import 'package:dbheatlcareproject/features/presentation/models/question_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+import '../../../core/utils/analytics_service.dart';
 import '../models/chat_message.dart';
 import '../models/symptom_questions.dart';
 import 'symptom_input_state.dart';
@@ -185,6 +186,7 @@ class SymptomInputNotifier extends StateNotifier<SymptomInputState> {
 
   void _recordAnswer(int questionIndex, String answer) {
     final updatedAnswers = Map<int, String>.from(state.userAnswers);
+    AnalyticsService.logButtonClick(buttonName: 'input_answer # ${questionIndex+1}');
     updatedAnswers[questionIndex] = answer;
     state = state.copyWith(userAnswers: updatedAnswers);
   }

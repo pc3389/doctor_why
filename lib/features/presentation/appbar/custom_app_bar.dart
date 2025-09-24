@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/utils/analytics_service.dart';
 import '../widgets/single_button.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -145,7 +146,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
           widget.leadingIcon ??
           IconButton(
             icon: SvgPicture.asset(AppSvgs.backButtonIcon),
-            onPressed: () => GoRouter.of(context).pop(),
+            onPressed: () {
+              AnalyticsService.logButtonClick(
+                buttonName: 'back_btn',
+              );
+              GoRouter.of(context).pop();
+            },
             tooltip: '뒤로 가기',
           ),
       // title: Row(

@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/utils/analytics_service.dart';
 import '../symptomInput/symptom_input_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -22,12 +23,18 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final termsState = ref.watch(termsNotifierProvider);
+    AnalyticsService.logScreenView(screenName: 'HomeScreen');
 
     return Scaffold(
       appBar: CustomAppBar(
         leadingIcon: IconButton(
           icon: SvgPicture.asset(AppSvgs.questionMarkIcon),
-          onPressed: () => {_showQuestionMarkDialog(context)},
+          onPressed: () async {
+            await AnalyticsService.logButtonClick(
+              buttonName: 'home_screen_next_button',
+            );
+            _showQuestionMarkDialog(context);
+          },
           tooltip: '물음표',
         ),
       ),
@@ -127,7 +134,10 @@ class HomeScreen extends ConsumerWidget {
             singleButton(
               context: context,
               text: '확인',
-              onPressed: () {
+              onPressed: () async {
+                await AnalyticsService.logButtonClick(
+                  buttonName: 'home_screen_next_button',
+                );
                 Navigator.of(dialogContext).pop();
               },
               horizontalPadding: 0.0,

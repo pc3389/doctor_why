@@ -12,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/analytics_service.dart';
 import '../symptom_input_result_notifier.dart';
 import 'diseases_prediction.dart';
 import 'medicine.dart';
@@ -36,6 +37,7 @@ class _SymptomResultDetailScreenState
   @override
   void initState() {
     super.initState();
+    AnalyticsService.logScreenView(screenName: 'system_input_screen');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notifier = ref.read(symptomResultDetailNotifierProvider.notifier);
       notifier.updateStateWithGptResponse(
@@ -97,6 +99,9 @@ class _SymptomResultDetailScreenState
                     context: context,
                     text: '재시도',
                     onPressed: () {
+                      AnalyticsService.logButtonClick(
+                        buttonName: 'result_detail_refresh',
+                      );
                       ref
                           .read(symptomResultDetailNotifierProvider.notifier)
                           .updateStateWithGptResponse(
@@ -132,6 +137,9 @@ class _SymptomResultDetailScreenState
               icon: SvgPicture.asset(AppSvgs.backButtonWhiteIcon),
               onPressed: () {
                 if (!state.isLoading) {
+                  AnalyticsService.logButtonClick(
+                    buttonName: 'result_detail_back_btn',
+                  );
                   GoRouter.of(context).pop();
                 }
               },
@@ -507,6 +515,9 @@ class _SymptomResultDetailScreenState
                             singleButton(
                               context: context,
                               onPressed: () {
+                                AnalyticsService.logButtonClick(
+                                  buttonName: 'result_detail_survey_btn',
+                                );
                                 // TODO Onpressed
                               },
                               backgroundColor: AppColors.white,
