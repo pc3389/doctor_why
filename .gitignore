@@ -47,3 +47,6 @@ app.*.map.json
 
 # .gitignore
 key.env
+
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist

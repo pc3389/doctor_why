@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDzvGXv9P_-THo2HRNpMlJYMkkszXyg9KM',
-    appId: '1:452124998387:android:bcf9bdf99ed8a64a6b5586',
+    appId: '1:452124998387:android:68c0d5458f579b606b5586',
     messagingSenderId: '452124998387',
     projectId: 'doctorwhy-37953',
     storageBucket: 'doctorwhy-37953.firebasestorage.app',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDAX3lUvoVWqQrcLiX7QbjXpUvPWNjOsk0',
-    appId: '1:452124998387:ios:2d1b3befc0c883da6b5586',
+    appId: '1:452124998387:ios:7139e11c4e57b0816b5586',
     messagingSenderId: '452124998387',
     projectId: 'doctorwhy-37953',
     storageBucket: 'doctorwhy-37953.firebasestorage.app',
     iosBundleId: 'com.dbproject.doctorwhy',
   );
+
 }
