@@ -1,9 +1,9 @@
-import 'package:dbheatlcareproject/core/theme/app_colors.dart';
-import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
-import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
-import 'package:dbheatlcareproject/features/presentation/home/home_screen.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomResult/symptom_result_notifier.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_screen.dart';
+import 'package:doctorwhy/core/theme/app_colors.dart';
+import 'package:doctorwhy/core/theme/app_svgs.dart';
+import 'package:doctorwhy/core/theme/app_text_styles.dart';
+import 'package:doctorwhy/features/presentation/home/home_screen.dart';
+import 'package:doctorwhy/features/presentation/symptomResult/symptom_result_notifier.dart';
+import 'package:doctorwhy/features/presentation/symptomresultdetail/symptom_result_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';

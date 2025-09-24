@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '452124998387',
     projectId: 'doctorwhy-37953',
     storageBucket: 'doctorwhy-37953.firebasestorage.app',
-    iosBundleId: 'com.example.dbheatlcareproject',
+    iosBundleId: 'com.dbproject.doctorwhy',
   );
 }

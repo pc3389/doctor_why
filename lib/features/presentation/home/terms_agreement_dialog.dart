@@ -1,7 +1,7 @@
 // widgets/terms_agreement_dialog.dart (또는 features/terms/presentation/)
-import 'package:dbheatlcareproject/core/theme/app_colors.dart';
-import 'package:dbheatlcareproject/features/presentation/widgets/single_button.dart';
-import 'package:dbheatlcareproject/features/presentation/home/terms_notifier.dart';
+import 'package:doctorwhy/core/theme/app_colors.dart';
+import 'package:doctorwhy/features/presentation/widgets/single_button.dart';
+import 'package:doctorwhy/features/presentation/home/terms_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

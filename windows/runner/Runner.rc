@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "dbheatlcareproject" "\0"
+            VALUE "CompanyName", "com.dbproject" "\0"
+            VALUE "FileDescription", "doctorwhy" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "dbheatlcareproject" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "dbheatlcareproject.exe" "\0"
-            VALUE "ProductName", "dbheatlcareproject" "\0"
+            VALUE "InternalName", "doctorwhy" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.dbproject. All rights reserved." "\0"
+            VALUE "OriginalFilename", "doctorwhy.exe" "\0"
+            VALUE "ProductName", "doctorwhy" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

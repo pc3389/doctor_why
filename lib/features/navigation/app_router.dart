@@ -1,9 +1,8 @@
-import 'package:dbheatlcareproject/features/presentation/models/chat_message.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_screen.dart';
+import 'package:doctorwhy/features/presentation/models/chat_message.dart';
+import 'package:doctorwhy/features/presentation/symptomresultdetail/symptom_result_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../presentation/appbar/custom_app_bar.dart';
 import '../presentation/home/home_screen.dart';
 import '../presentation/settings/settings_screen.dart';
 import '../presentation/symptomInput/symptom_input_screen.dart';

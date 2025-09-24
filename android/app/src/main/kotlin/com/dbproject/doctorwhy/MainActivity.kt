@@ -1,4 +1,4 @@
-package com.example.dbheatlcareproject
+package com.dbproject.doctorwhy
 
 import io.flutter.embedding.android.FlutterActivity
 

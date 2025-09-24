@@ -1,5 +1,5 @@
-import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
-import 'package:dbheatlcareproject/features/presentation/models/question_data.dart';
+import 'package:doctorwhy/core/theme/app_svgs.dart';
+import 'package:doctorwhy/features/presentation/models/question_data.dart';
 
 final List<QuestionData> symptomAnalysisQuestions = [
   QuestionData(

@@ -1,5 +1,5 @@
-import 'package:dbheatlcareproject/features/data/models/user_input_request_model.dart';
-import 'package:dbheatlcareproject/features/presentation/symptom_input_result_state.dart';
+import 'package:doctorwhy/features/data/models/user_input_request_model.dart';
+import 'package:doctorwhy/features/presentation/symptom_input_result_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'symptom_input_result_notifier.g.dart';

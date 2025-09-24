@@ -1,4 +1,4 @@
-import 'package:dbheatlcareproject/features/presentation/models/question_data.dart';
+import 'package:doctorwhy/features/presentation/models/question_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../models/chat_message.dart';

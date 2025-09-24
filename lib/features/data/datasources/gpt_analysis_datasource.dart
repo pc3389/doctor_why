@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:dbheatlcareproject/features/data/models/user_input_request_model.dart';
+import 'package:doctorwhy/features/data/models/user_input_request_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

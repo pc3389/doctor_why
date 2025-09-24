@@ -1,6 +1,6 @@
 {
-    "name": "dbheatlcareproject",
-    "short_name": "dbheatlcareproject",
+    "name": "doctorwhy",
+    "short_name": "drwhy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

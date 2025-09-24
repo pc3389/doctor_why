@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.dbheatlcareproject</string>
+	<string>com.dbproject.doctorwhy</string>
 	<key>PROJECT_ID</key>
 	<string>doctorwhy-37953</string>
 	<key>STORAGE_BUCKET</key>

@@ -1,8 +1,8 @@
-import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
-import 'package:dbheatlcareproject/features/presentation/appbar/custom_app_bar.dart';
-import 'package:dbheatlcareproject/features/presentation/widgets/single_button.dart';
-import 'package:dbheatlcareproject/features/presentation/home/terms_agreement_dialog.dart';
-import 'package:dbheatlcareproject/features/presentation/home/terms_notifier.dart';
+import 'package:doctorwhy/core/theme/app_svgs.dart';
+import 'package:doctorwhy/features/presentation/appbar/custom_app_bar.dart';
+import 'package:doctorwhy/features/presentation/widgets/single_button.dart';
+import 'package:doctorwhy/features/presentation/home/terms_agreement_dialog.dart';
+import 'package:doctorwhy/features/presentation/home/terms_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';

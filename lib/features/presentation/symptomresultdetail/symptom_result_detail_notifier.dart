@@ -1,6 +1,6 @@
-import 'package:dbheatlcareproject/features/data/models/user_input_request_model.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/serverity.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/symptom_result_detail_state.dart';
+import 'package:doctorwhy/features/data/models/user_input_request_model.dart';
+import 'package:doctorwhy/features/presentation/symptomresultdetail/serverity.dart';
+import 'package:doctorwhy/features/presentation/symptomresultdetail/symptom_result_detail_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/repositories/gpt_analysis_repository.dart';

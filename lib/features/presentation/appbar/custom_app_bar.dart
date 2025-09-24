@@ -1,15 +1,13 @@
 // lib/widgets/custom_app_bar.dart (예시 경로)
 import 'dart:async';
-import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
+import 'package:doctorwhy/core/theme/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/analytics_service.dart';
-import '../widgets/single_button.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String? title; // 선택적 타이틀 (필요하다면)

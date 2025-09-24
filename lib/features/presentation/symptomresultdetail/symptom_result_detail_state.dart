@@ -1,5 +1,5 @@
-import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/diseases_prediction.dart';
-import 'package:dbheatlcareproject/features/presentation/symptomresultdetail/serverity.dart';
+import 'package:doctorwhy/features/presentation/symptomresultdetail/diseases_prediction.dart';
+import 'package:doctorwhy/features/presentation/symptomresultdetail/serverity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'medicine.dart';

@@ -1,6 +1,6 @@
-import 'package:dbheatlcareproject/core/theme/app_colors.dart';
-import 'package:dbheatlcareproject/core/theme/app_svgs.dart';
-import 'package:dbheatlcareproject/core/theme/app_text_styles.dart';
+import 'package:doctorwhy/core/theme/app_colors.dart';
+import 'package:doctorwhy/core/theme/app_svgs.dart';
+import 'package:doctorwhy/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
